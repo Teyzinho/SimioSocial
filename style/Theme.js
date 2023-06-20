@@ -21,6 +21,7 @@ export const theme = {
     },
     fonts: {
         primary: 'Roboto, sans-serif',
+        roboto_condenced:'Roboto Condensed, sans-serif',
     },
     paddings: {
       container: '15px',

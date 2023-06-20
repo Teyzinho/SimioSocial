@@ -7,5 +7,6 @@ export const Nav = styled.nav`
   display: flex;
   color: white;
   align-items: center;
-  
+
+  font-family: ${({theme}) => theme.fonts.roboto_condenced};
 `;

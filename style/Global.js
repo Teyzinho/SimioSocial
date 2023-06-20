@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle, css } from 'styled-components'
-
+import fontsCss from './fonts.module.css'
 export const GlobalStyles = createGlobalStyle`
-
+${fontsCss}
 /* Box sizing rules */
 *,
 *::before,
