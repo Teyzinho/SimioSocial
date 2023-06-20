@@ -1,7 +1,13 @@
+"use client"
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { theme } from '@/style/Theme'
+import { GlobalStyles } from '@/style/Global'
+import { ThemeProvider } from 'styled-components'
 
 const inter = Inter({ subsets: ['latin'] })
+import StyledComponentsRegistry from '@/lib/registry'
+import NavBar from '@/src/scenes/NavBar/NavBar'
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +17,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+
+
+      <body className={inter.className}>
+        <StyledComponentsRegistry>
+          <ThemeProvider theme={theme}>
+            <GlobalStyles />
+            <NavBar />
+            {children}
+          </ThemeProvider>
+
+        </StyledComponentsRegistry>
+
+      </body>
     </html>
+
   )
 }
