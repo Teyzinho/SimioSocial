@@ -1,9 +1,25 @@
+import { device } from "@/style/Breakpoints";
 import { styled } from "styled-components";
 
+export const WrapSideBar = styled.div`
+    flex: 0 0 225px;
+    position: relative;
+
+    @media ${device.lg}{
+        width: fit-content;
+        flex: 0 0 65px;
+    }
+    @media ${device.sm}{
+        display: none;
+        flex: 0 0 0;
+    }
+`
+
 export const StySideBar = styled.div`
-    position: sticky;
+    flex: 0 0 225px;
+    position: fixed;
     height: 100%;
-    width: 250px;
+    width: 225px;
     border-right: 3px solid;
     border-color: ${({theme}) => theme.colors.secondary};
 
@@ -14,8 +30,23 @@ export const StySideBar = styled.div`
 
     padding-top: 12px;
 
+    & > :last-child{
+        margin-top: auto;
+        margin-bottom: 100px;
+    }
+
     & svg{
         width: 35px;
         height: 35px;
+    }
+
+    @media ${device.lg}{
+        width: fit-content;
+        & p{
+            display: none;
+        }
+    }
+    @media ${device.sm}{
+        display: none;
     }
 `

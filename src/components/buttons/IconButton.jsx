@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { device } from "@/style/Breakpoints";
 
 export const IconButton = styled.button`
   background-color: transparent;
@@ -10,19 +11,34 @@ export const IconButton = styled.button`
   padding: 0;
   color: ${({ theme, color }) => color || theme.colors.primary};
   transition: all 0.2s;
+  font-size: 0.9rem;
 
-  & svg{
-    width: 25px;
-    height: 25px;
-    padding: 10px;
+  & svg {
+    width: ${({ width }) => width || "20px"};
+    height: 20px;
+    padding: ${({ padding }) => padding || "10px"};
     border-radius: 100%;
+
+    @media ${device.sm} {
+      width: ${({ width }) => width || "15px"};
+      height: 15px;
+      padding: ${({ padding }) => padding || "5px"};
+    }
   }
 
   &:hover {
     color: ${({ theme }) => theme.colors.secondary};
 
-    & svg{
-        background-color: #0080001c;
+    & svg {
+      background-color: #0080001c;
     }
   }
+
+  @media ${device.sm} {
+    font-size: 0.8rem;
+  }
+  @media ${device.xs} {
+    font-size: 0.6rem;
+  }
 `;
+

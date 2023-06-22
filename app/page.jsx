@@ -1,13 +1,11 @@
 "use client"
-import SideBar from '@/src/scenes/SideBar/SideBar'
 import Feed from '@/src/scenes/Feed/Feed'
+import SideBar from '@/src/scenes/SideBar/SideBar'
+import WhoFollow from '@/src/scenes/WhoFollow/WhoFollow'
 
 export default function Home() {
   return (
-    <main style={{
-      display:"flex"
-    }}>
-      <SideBar />
+    <main>
       <Feed />
     </main>
   )

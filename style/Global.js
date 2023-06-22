@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle, css } from 'styled-components'
 import fontsCss from './fonts.module.css'
+
 export const GlobalStyles = createGlobalStyle`
 ${fontsCss}
 /* Box sizing rules */
@@ -24,6 +25,7 @@ body {
   /* color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.background}; */
   line-height: 1;
+  overflow-x: hidden;
 }
 h1,
 h2,
@@ -62,6 +64,9 @@ html:focus-within {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
   text-decoration-skip-ink: auto;
+}
+a{
+  text-decoration: none;
 }
 
 /* Make images easier to work with */

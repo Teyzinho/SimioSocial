@@ -1,36 +1,43 @@
 import React from "react";
-import { StySideBar } from "./SideBar.styles";
-import { SideBarButton } from "@/src/components/buttons/button";
+import { StySideBar, WrapSideBar } from "./SideBar.styles";
+import { SideBarButton } from "../../../src/components/buttons/button";
 import Image from "next/image";
 import { AiOutlineHome } from "react-icons/Ai";
 import { IoMdNotificationsOutline } from "react-icons/Io";
-import {BsChatLeftDots,BsBookmark} from 'react-icons/bs'
-import {CiLogout} from 'react-icons/ci'
+import { BsChatLeftDots, BsBookmark } from "react-icons/bs";
+import { CiLogout } from "react-icons/ci";
+import Link from "next/link";
 
 const SideBar = () => {
   return (
-    <div>
+    <WrapSideBar>
       <StySideBar>
         {/* Pag Inicial */}
-        <SideBarButton>
-          <AiOutlineHome />
-          Página Inicial
-        </SideBarButton>
+        <Link href="/">
+          <SideBarButton>
+            <AiOutlineHome />
+            <p>Página Inicial</p>
+          </SideBarButton>
+        </Link>
+
         {/* Notificações */}
         <SideBarButton>
           <IoMdNotificationsOutline />
-          Notificações
+          <p>Notificações</p>
         </SideBarButton>
+
         {/* Mensagens */}
         <SideBarButton>
-          <BsChatLeftDots/>
-          Mensagens
+          <BsChatLeftDots />
+          <p>Mensagens</p>
         </SideBarButton>
+
         {/* Posts Salvos */}
         <SideBarButton>
-          <BsBookmark/>
-          Posts Salvos
+          <BsBookmark />
+          <p>Posts Salvos</p>
         </SideBarButton>
+
         {/* Perfil */}
         <SideBarButton>
           <Image
@@ -39,15 +46,16 @@ const SideBar = () => {
             width={30}
             height={30}
           />
-          Perfil
+          <p>Perfil</p>
         </SideBarButton>
+
         {/* Deslogar */}
         <SideBarButton>
-          <CiLogout/>
-          Deslogar
+          <CiLogout />
+          <p>Deslogar</p>
         </SideBarButton>
       </StySideBar>
-    </div>
+    </WrapSideBar>
   );
 };
 
