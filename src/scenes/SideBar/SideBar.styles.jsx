@@ -1,5 +1,5 @@
 import { device } from "@/style/Breakpoints";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const WrapSideBar = styled.div`
     flex: 0 0 225px;

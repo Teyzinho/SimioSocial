@@ -1,22 +1,86 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
+import { device } from "@/style/Breakpoints";
 
 export const Nav = styled.nav`
-  width: 100vw;
+  width: 100%;
   height: 50px;
-  background-color: #0D0D0D;
+  background-color: #0d0d0d;
   display: flex;
   color: white;
   align-items: center;
+  justify-content: space-between;
   position: sticky;
   top: 0;
-  gap: 5px;
   padding: 5px 15px;
   z-index: 999;
 
-  & h1{
-    font-family: ${({theme}) => theme.fonts.roboto_condensed};
+  & h1 {
+    font-family: ${({ theme }) => theme.fonts.roboto_condensed};
     font-style: normal;
     font-weight: 200;
     font-size: 28px;
+  }
+
+  & a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: white;
+  }
+
+  & button {
+
+  }
+
+  &>:last-child{
+    flex: 0 0 150px;
+    margin-right: 52px;
+  }
+`;
+
+export const SearchContainer = styled.div`
+  position: relative;
+  width: 450px;
+  height: 35px;
+  flex: 0 0 500px;
+
+  & input {
+    border-radius: 50px;
+    height: 100%;
+    padding-left: 16px;
+
+    &::placeholder{
+      padding-left: 16px;
+    }
+
+    &:focus {
+      + label {
+        opacity: 0;
+      }
+      &::placeholder{
+      padding-left: 0px;
+    }
+    }
+  }
+
+  @media ${device.lg}{
+    display: none;
+  }
+`;
+
+export const GlassLabel = styled.label`
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  fill: gray;
+  color: gray;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `;

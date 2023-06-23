@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { Avatar } from "../pictures/Avatar";
 
 export const PostHeader = styled.div`

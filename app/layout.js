@@ -1,15 +1,11 @@
 "use client"
 import './globals.css'
-import { Inter } from 'next/font/google'
 import { theme } from '@/style/Theme'
 import { GlobalStyles } from '@/style/Global'
 import { ThemeProvider, styled } from 'styled-components'
 import SideBar from '@/src/scenes/SideBar/SideBar'
 import WhoFollow from '@/src/scenes/WhoFollow/WhoFollow'
 
-
-
-// const inter = Inter({ subsets: ['latin'] })
 import StyledComponentsRegistry from '@/lib/registry'
 import NavBar from '@/src/scenes/NavBar/NavBar'
 
@@ -24,7 +20,7 @@ const ChildrenWrapper = styled.div`
 `
 
 export default function RootLayout({ children }) {
-  return (
+  return ( 
     <html lang="en">
       <head>
         {/* Roboto Condensed */}

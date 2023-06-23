@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from "../userCard/UserCard";
 import Typography from "../display/Typography";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { IconButton } from "../buttons/IconButton";
 import { FiHeart } from "react-icons/fi";
 

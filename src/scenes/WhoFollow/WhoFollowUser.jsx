@@ -1,7 +1,7 @@
 import { Button } from '@/src/components/buttons/button'
 import UserCard from '@/src/components/userCard/UserCard'
 import React from 'react'
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;

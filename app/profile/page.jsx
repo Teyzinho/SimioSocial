@@ -1,9 +1,9 @@
 "use client";
+
 import { Button } from "@/src/components/buttons/button";
 import Typography from "@/src/components/display/Typography";
 import { Avatar } from "@/src/components/pictures/Avatar";
 import Feed from "@/src/scenes/Feed/Feed";
-import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -49,7 +49,7 @@ const TabButtonContainer = styled.button`
 
 const TabButton = ({ label, active, onClick }) => {
   return (
-    <TabButtonContainer active={active} onClick={onClick}>
+    <TabButtonContainer active={active ? "true" : undefined} onClick={onClick}>
       {label}
     </TabButtonContainer>
   );
@@ -62,8 +62,17 @@ const Profile = () => {
     setActiveTab(tab);
   };
 
+  const handleFollowersClick = () =>{
+    console.log("seguidores")
+  }
+
+  const handleFollowingClick = () =>{
+    console.log("seguindo")
+  }
+
   return (
-    <div>
+
+    <main>
       <ProfileCard>
         {/* Banner */}
         <ProfileBanner src="/images/banner.jpg" alt="banner" />
@@ -80,15 +89,18 @@ const Profile = () => {
           <Typography>@Tey</Typography>
         </ProfileInfo>
 
-        <Button style={{
+        <Button 
+        style={{
             marginLeft:"auto",
             marginRight:"10px",
             marginTop:"10px"
-        }}>
+        }}
+        >
             Seguir
         </Button>
 
-        <div style={{
+        <div 
+        style={{
             display:"flex",
             justifyContent:"flex-end",
             gap:"16px",
@@ -96,19 +108,32 @@ const Profile = () => {
             marginTop:"75px",
             marginRight:"15px"
         }}>
-            <span style={{display:"flex", gap:"8px",}}>
-                <Typography variant="semi_bold">
+          {/* Seguidores */}
+            <span 
+              style={{display:"flex", gap:"8px", cursor:"pointer"}}
+            >
+                <Typography 
+                  onClick={handleFollowersClick}
+                variant="semi_bold"
+                >
                     Seguidores
                 </Typography>
                 <Typography style={{fontSize:"0.9rem"}}>
                     20
                 </Typography>
             </span>
-            <span style={{display:"flex", gap:"8px",}}>
-                <Typography variant="semi_bold">
+            {/* Seguindo */}
+            <span 
+              style={{display:"flex", gap:"8px",cursor:"pointer"}}
+            >
+                <Typography 
+                  onClick={handleFollowingClick}
+                variant="semi_bold">
                     Seguindo
                 </Typography>
-                <Typography style={{fontSize:"0.9rem"}}>
+                <Typography 
+                  style={{fontSize:"0.9rem"}}
+                >
                     20
                 </Typography>
             </span>
@@ -128,11 +153,13 @@ const Profile = () => {
         </ProfileTabButton>
       </ProfileCard>
     
-    <div style={{paddingTop:"26px"}}>
+    <div 
+      style={{paddingTop:"26px"}}
+    >
       <Feed />
     </div>
 
-    </div>
+    </main>
   );
 };
 

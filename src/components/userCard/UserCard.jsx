@@ -1,12 +1,13 @@
 import React from "react";
 import { Avatar } from "../pictures/Avatar";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { Button } from "../buttons/button";
 import Typography from "../display/Typography";
 
 const Username = styled.span`
   display: flex;
   gap: 5px;
+  align-items: center;
 `;
 
 const UserCardContainer = styled.div`
@@ -34,7 +35,7 @@ const UserCard = ({ followBtn }) => {
       <div>
         <Username>
           <Typography variant="h4">Tey</Typography>
-          <pTypography>@Tey</pTypography>
+          <Typography>@Tey</Typography>
         </Username>
         <Typography variant="weak" style={{ marginTop: "4px" }}>
           2h atrás

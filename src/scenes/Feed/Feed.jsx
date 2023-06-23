@@ -1,11 +1,6 @@
 import React from "react";
 import Post from "../../components/posts/Post";
-import { styled } from "styled-components";
-import { Avatar } from "../../../src/components/pictures/Avatar";
-import { Input } from "../../../src/components/inputs/input";
-import { BsImages, BsEmojiSunglasses } from "react-icons/bs";
-import { IconButton } from "../../../src/components/buttons/IconButton";
-import { Button } from "../../../src/components/buttons/button";
+import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
 
 const StyledFeed = styled.div`
@@ -48,37 +43,8 @@ const Wrapper = styled.div`
 const Feed = () => {
   return (
     <Wrapper>
-      {/* <SharePost>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <Avatar
-            src="/images/profile.png"
-            alt="profile picture"
-            width={50}
-            height={50}
-          />
-          <Input placeholder="No que está pensando?"></Input>
-        </div>
-        <div style={{ display: "flex",justifyContent: "space-between"}}>
-          <div style={{ display: "flex"}}>
-            <IconButton>
-              <BsImages />
-            </IconButton>
-
-            <IconButton>
-              <BsEmojiSunglasses />
-            </IconButton>
-          </div>
-          <Button>
-            Publicar
-          </Button>
-        </div>
-      </SharePost> */}
 
       <StyledFeed>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
         <Post />
       </StyledFeed>
     </Wrapper>

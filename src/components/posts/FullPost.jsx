@@ -12,6 +12,7 @@ import { Avatar } from "../pictures/Avatar";
 import { Input } from "../inputs/input";
 import { Button } from "../buttons/button";
 import { device } from "@/style/Breakpoints";
+import Feed from "@/src/scenes/Feed/Feed";
 
 const StyledFullPost = styled.div`
   width: 1000px;
@@ -91,6 +92,8 @@ const FullPost = () => {
   };
 
   return (
+    <main>
+
     <StyledFullPost>
       {/* Img */}
       <FullPostImgWrapper>
@@ -149,6 +152,9 @@ const FullPost = () => {
         </div>
       </FullPostContent>
     </StyledFullPost>
+
+    <Feed />
+    </main>
   );
 };
 
