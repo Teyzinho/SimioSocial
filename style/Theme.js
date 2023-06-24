@@ -4,6 +4,8 @@ export const theme = {
       primary: '#090909',
       secondary: '#038C25',
       neutral: '#F2F2F2',
+      blue: '#0076CE',
+      red: '#BF0413',
     },
     fonts: {
         primary: "'Roboto', sans-serif",

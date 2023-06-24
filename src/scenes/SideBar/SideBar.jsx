@@ -21,10 +21,12 @@ const SideBar = () => {
         </Link>
 
         {/* Notificações */}
-        <SideBarButton>
-          <IoMdNotificationsOutline />
-          <p>Notificações</p>
-        </SideBarButton>
+        <Link href="/notification">
+          <SideBarButton>
+            <IoMdNotificationsOutline />
+            <p>Notificações</p>
+          </SideBarButton>
+        </Link>
 
         {/* Mensagens */}
         <SideBarButton>
@@ -39,15 +41,17 @@ const SideBar = () => {
         </SideBarButton>
 
         {/* Perfil */}
-        <SideBarButton>
-          <Image
-            src="/icons/person-circle.svg"
-            alt="profile-icon"
-            width={30}
-            height={30}
-          />
-          <p>Perfil</p>
-        </SideBarButton>
+        <Link href="/profile">
+          <SideBarButton>
+            <Image
+              src="/icons/person-circle.svg"
+              alt="profile-icon"
+              width={30}
+              height={30}
+            />
+            <p>Perfil</p>
+          </SideBarButton>
+        </Link>
 
         {/* Deslogar */}
         <SideBarButton>

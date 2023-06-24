@@ -35,7 +35,7 @@ const NavBar = () => {
         </GlassLabel>
       </SearchContainer>
       <Link
-        href="#"
+        href="/create-post"
       >
         <Button>Criar Post</Button>
       </Link>

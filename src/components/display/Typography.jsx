@@ -41,6 +41,7 @@ const variants = {
 // Componente Typography
 const Typography = styled.p`
   font-family: ${({theme}) => theme.fonts.primary};
+  color: black;
 
   ${({ variant }) => variants[variant]};
 `;

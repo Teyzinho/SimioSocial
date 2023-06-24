@@ -10,19 +10,19 @@ export const WrapSideBar = styled.div`
         flex: 0 0 65px;
     }
     @media ${device.sm}{
-        display: none;
-        flex: 0 0 0;
+        position: fixed;
+        bottom: 0;
+        z-index: 9999;
     }
 `
 
 export const StySideBar = styled.div`
-    flex: 0 0 225px;
     position: fixed;
     height: 100%;
     width: 225px;
     border-right: 3px solid;
     border-color: ${({theme}) => theme.colors.secondary};
-
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,6 +47,18 @@ export const StySideBar = styled.div`
         }
     }
     @media ${device.sm}{
-        display: none;
+        border: none;
+        padding: 0;
+        bottom: 0;
+        height: fit-content;
+        width: 100%;
+        justify-content: space-between;
+        background-color: ${({theme}) => theme.colors.neutral};
+        
+        flex-direction: row;
+        & > :last-child{
+            margin-bottom: 0;
+
+    }
     }
 `
