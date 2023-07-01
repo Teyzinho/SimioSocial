@@ -12,7 +12,7 @@ import { Avatar } from "../pictures/Avatar";
 import { Input } from "../inputs/input";
 import { Button } from "../buttons/button";
 import { device } from "@/style/Breakpoints";
-import Feed from "@/src/scenes/Feed/Feed";
+import Feed from "@/src/components/Feed/Feed";
 
 const StyledFullPost = styled.div`
   width: 1000px;

@@ -3,7 +3,7 @@
 import { Button } from "@/src/components/buttons/button";
 import Typography from "@/src/components/display/Typography";
 import { Avatar } from "@/src/components/pictures/Avatar";
-import Feed from "@/src/scenes/Feed/Feed";
+import Feed from "@/src/components/Feed/Feed";
 import styled from "styled-components";
 import { useState } from "react";
 

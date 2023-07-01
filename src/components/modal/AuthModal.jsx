@@ -1,6 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
+import useModal from "@/src/features/modal/useModal";
 
 const LoginContainer = styled.div`
   position: fixed;
@@ -21,22 +22,24 @@ const LoginModal = styled.div`
   background-color: ${({ theme }) => theme.colors.neutral};
 `;
 
-const Login = ({handleCloseLoginModal}) => {
+const AuthModal = ({ handleCloseLoginModal }) => {
+  const { isOpen, closeModal } = useModal();
 
+  if(!isOpen){
+    return;
+  }
 
   return (
     <LoginContainer>
       <LoginModal>
-        <button onClick={handleCloseLoginModal}>
-            <AiOutlineClose />
+        <button onClick={closeModal}>
+          <AiOutlineClose />
         </button>
 
-        <div>
-
-        </div>
+        <div></div>
       </LoginModal>
     </LoginContainer>
   );
 };
 
-export default Login;
+export default AuthModal;

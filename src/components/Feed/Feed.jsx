@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../../components/posts/Post";
+import Post from "../posts/Post";
 import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
 
