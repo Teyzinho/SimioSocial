@@ -2,6 +2,13 @@ import styled, { css } from 'styled-components';
 import { device } from '@/style/Breakpoints';
 
 export const SideBarButton = styled.button`
+
+    ${({active}) => active && css`
+        background-color: #008000b3;
+        color:white;
+        transform: scale(1.05);
+    `};
+
     border: none;
     border-radius: 5px;
 

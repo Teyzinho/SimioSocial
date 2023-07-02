@@ -15,6 +15,7 @@ import NavBar from '@/src/components/NavBar/NavBar'
 //redux
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+import SupabaseProvider from '@/Providers/SupabaseProvider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -45,19 +46,24 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <StyledComponentsRegistry>
+          {/* Provider Redux */}
           <Provider store={store}>
+            {/* Provider Theme Styled-Components */}
             <ThemeProvider theme={theme}>
               <GlobalStyles />
-              <NavBar />
-              <div style={{ display: 'flex', width: "100%" }}>
-                <AuthModal/>
-                
-                <SideBar />
-                <ChildrenWrapper>
-                  {children}
-                </ChildrenWrapper>
-                <WhoFollow />
-              </div>
+              {/* SupabaseProviders */}
+              <SupabaseProvider>
+                {/* Site */}
+                <NavBar />
+                <div style={{ display: 'flex', width: "100%" }}>
+                  <AuthModal />
+                  <SideBar />
+                  <ChildrenWrapper>
+                    {children}
+                  </ChildrenWrapper>
+                  <WhoFollow />
+                </div>
+              </SupabaseProvider>
             </ThemeProvider>
           </Provider>
         </StyledComponentsRegistry>

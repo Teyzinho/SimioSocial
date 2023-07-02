@@ -8,13 +8,13 @@ import { IoMdNotificationsOutline } from "react-icons/Io";
 import { BsChatLeftDots, BsBookmark } from "react-icons/bs";
 import { CiLogout } from "react-icons/ci";
 
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const SideBar = () => {
   const profileImg = "/icons/person-circle.svg";
+  const supabase = useSupabaseClient()
 
   const pathName = usePathname();
   const routes = useMemo(() => [
@@ -52,6 +52,13 @@ const SideBar = () => {
 
   const { openModal } = useModal();
 
+  const session = useSession();
+  console.log("Session :", session)
+
+  const logout = async () => {
+    await supabase.auth.signOut();
+  }
+
   return (
     <WrapSideBar>
       <StySideBar>
@@ -59,17 +66,20 @@ const SideBar = () => {
           <SideBarItem key={item.label} {...item} />
         ))}
 
-        {/* Logar */}
-        <SideBarButton onClick={openModal}>
-          <CiLogout />
-          <p>Logar</p>
-        </SideBarButton>
+        {/* Logar e Deslogar*/}
 
-        {/* Deslogar */}
-        <SideBarButton>
-          <CiLogout />
-          <p>Deslogar</p>
-        </SideBarButton>
+        {session ? (
+          <SideBarButton onClick={logout}>
+            <CiLogout />
+            <p>Deslogar</p>
+          </SideBarButton>
+        ) : (
+          <SideBarButton onClick={openModal}>
+            <CiLogout />
+            <p>Logar</p>
+          </SideBarButton>
+        )}
+
       </StySideBar>
     </WrapSideBar>
   );

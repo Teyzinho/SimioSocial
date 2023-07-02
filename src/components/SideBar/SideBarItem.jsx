@@ -9,7 +9,7 @@ const SideBarItem = ({ icon:Icon, label, active, href }) => {
 
   return (
     <Link href={href}>
-      <SideBarButton>
+      <SideBarButton active={active} >
       {isProfileIcon ? (
           <Image
             src={Icon}
