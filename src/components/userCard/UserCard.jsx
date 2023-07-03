@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "../pictures/Avatar";
 import styled from "styled-components";
 import { Button } from "../buttons/button";
 import Typography from "../display/Typography";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const Username = styled.span`
   display: flex;
@@ -28,14 +29,49 @@ const UserCardContainer = styled.div`
   }
 `;
 
-const UserCard = ({ followBtn }) => {
+const UserCard = ({ followBtn, userId }) => {
+  const supabase = useSupabaseClient();
+  const [userData, setUserData] = useState([]);
+
+
+  if(!userId){
+    return null;
+  }
+  
+  const fetchUser = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+
+      if (error) {
+        console.log("Error fetching:", error);
+      } else {
+        setUserData(data);
+      }
+    } catch (error) {
+      console.log("Error fetching:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  if (userData.length === 0) {
+    return null; 
+  }
+
+  const user = userData[0]
+
   return (
     <UserCardContainer>
-      <Avatar src="/images/profile.png" alt="avatar" width={50} height={50} />
+      <Avatar src={user.avatar_url} alt="avatar" width={50} height={50} />
       <div>
         <Username>
-          <Typography variant="h4">Tey</Typography>
-          <Typography>@Tey</Typography>
+          <Typography variant="h4">{user.full_name}</Typography>
+          <Typography>{user.full_name}</Typography>
         </Username>
         <Typography variant="weak" style={{ marginTop: "4px" }}>
           2h atrás

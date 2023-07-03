@@ -1398,6 +1398,11 @@
   resolved "https://registry.npmjs.org/@types/stylis/-/stylis-4.2.0.tgz"
   integrity sha512-n4sx2bqL0mW1tvDf/loQ+aMX7GQD3lc3fkCMC55VFNDu/vBOabO+LTIeXKM14xK0ppk5TUGcWRjiSpIlUpghKw==
 
+"@types/uniqid@^5.3.2":
+  version "5.3.2"
+  resolved "https://registry.npmjs.org/@types/uniqid/-/uniqid-5.3.2.tgz"
+  integrity sha512-/NYoaZpWsnAJDsGYeMNDeG3p3fuUb4AiC7MfKxi5VSu18tXd08w6Ch0fKW94T4FeLXXZwZPoFgHA1O0rDYKyMQ==
+
 "@types/use-sync-external-store@^0.0.3":
   version "0.0.3"
   resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
@@ -3447,6 +3452,11 @@ queue-microtask@^1.2.2:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-hook-form@^7.45.1:
+  version "7.45.1"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.45.1.tgz"
+  integrity sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==
+
 react-icons@^4.9.0:
   version "4.9.0"
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.9.0.tgz"
@@ -3474,7 +3484,7 @@ react-is@^18.0.0:
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
 
-react@*, "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.2.0, "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@18.2.0:
+react@*, "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0 || ^18", react@^18.2.0, "react@>= 16.8.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -4049,6 +4059,11 @@ unicode-property-aliases-ecmascript@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-2.1.0.tgz"
   integrity sha512-6t3foTQI9qne+OZoVQB/8x8rk2k1eVy1gRXhV3oFQ5T6R1dqQ1xtin3XqSlx3+ATBkliTaR/hHyJBm+LVPNM8w==
+
+uniqid@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.npmjs.org/uniqid/-/uniqid-5.4.0.tgz"
+  integrity sha512-38JRbJ4Fj94VmnC7G/J/5n5SC7Ab46OM5iNtSstB/ko3l1b5g7ALt4qzHFgGciFkyiRNtDXtLNb+VsxtMSE77A==
 
 untildify@^4.0.0:
   version "4.0.0"

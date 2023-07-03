@@ -1,21 +1,19 @@
 import Link from "next/link";
 import { SideBarButton } from "../buttons/button";
-import Image from "next/image";
+import { Avatar } from "../pictures/Avatar";
 
 
 const SideBarItem = ({ icon:Icon, label, active, href }) => {
 
-    const isProfileIcon = Icon === "/icons/person-circle.svg";
+    const isProfileIcon = label === "Perfil";
 
   return (
     <Link href={href}>
       <SideBarButton active={active} >
       {isProfileIcon ? (
-          <Image
+          <Avatar
             src={Icon}
-            alt="profile-icon"
             width={30}
-            height={30}
           />
         ) : (
           <Icon />

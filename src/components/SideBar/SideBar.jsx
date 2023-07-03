@@ -6,15 +6,23 @@ import SideBarItem from "./SideBarItem";
 import { AiOutlineHome } from "react-icons/Ai";
 import { IoMdNotificationsOutline } from "react-icons/Io";
 import { BsChatLeftDots, BsBookmark } from "react-icons/bs";
-import { CiLogout } from "react-icons/ci";
+import { CiLogout,CiLogin } from "react-icons/ci";
 
-import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const SideBar = () => {
-  const profileImg = "/icons/person-circle.svg";
+  const session = useSession();
   const supabase = useSupabaseClient()
+  const [profile, setProfile] = useState(null)
+  const router = useRouter();
+
+  // const profileImg = "/icons/person-circle.svg";
+  // const profileImg = (profile?.avatar_url ?  profile?.avatar_url : "/icons/person-circle.svg");
+
+  const [profileImg, setProfileImg] = useState("/icons/person-circle.svg");
+
 
   const pathName = usePathname();
   const routes = useMemo(() => [
@@ -52,12 +60,29 @@ const SideBar = () => {
 
   const { openModal } = useModal();
 
-  const session = useSession();
-  console.log("Session :", session)
-
   const logout = async () => {
     await supabase.auth.signOut();
+    setProfileImg("/icons/person-circle.svg"); // Redefinir a imagem do perfil imediatamente
+    router.refresh();
   }
+
+  useEffect(() => {
+    if(session){
+      supabase.from('profiles')
+      .select('*')
+      .eq('id', session.user.id)
+      .then(result => {
+        if(result.data.length){
+          setProfile(result.data[0])
+        }
+      })
+    }
+  }, [session])
+
+  useEffect(() => {
+    const avatarUrl = profile?.avatar_url || "/icons/person-circle.svg";
+    setProfileImg(avatarUrl);
+  }, [profile]);
 
   return (
     <WrapSideBar>
@@ -75,7 +100,7 @@ const SideBar = () => {
           </SideBarButton>
         ) : (
           <SideBarButton onClick={openModal}>
-            <CiLogout />
+            <CiLogin />
             <p>Logar</p>
           </SideBarButton>
         )}

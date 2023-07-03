@@ -28,12 +28,8 @@ export const Nav = styled.nav`
     color: white;
   }
 
-  & button {
-
-  }
-
   &>:last-child{
-    flex: 0 0 150px;
+    flex: 0 0 200px;
     margin-right: 52px;
   }
 `;

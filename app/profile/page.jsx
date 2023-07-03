@@ -6,6 +6,9 @@ import { Avatar } from "@/src/components/pictures/Avatar";
 import Feed from "@/src/components/Feed/Feed";
 import styled from "styled-components";
 import { useState } from "react";
+import { useSession } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/navigation";
+import useModal from "@/src/features/modal/useModal";
 
 const ProfileCard = styled.div`
   width:90%;
@@ -56,7 +59,16 @@ const TabButton = ({ label, active, onClick }) => {
 };
 
 const Profile = () => {
+  const session = useSession();
+  const router = useRouter();
+  const {openModal} = useModal();
+
   const [activeTab, setActiveTab] = useState("Posts");
+
+  if(!session){
+    router.replace("/");
+    openModal();
+  }
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -71,7 +83,6 @@ const Profile = () => {
   }
 
   return (
-
     <main>
       <ProfileCard>
         {/* Banner */}

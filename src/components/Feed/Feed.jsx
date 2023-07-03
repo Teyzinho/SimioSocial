@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../posts/Post";
 import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const StyledFeed = styled.div`
   margin-top: 56px;
@@ -12,13 +13,13 @@ const StyledFeed = styled.div`
   grid-auto-rows: minmax(20px, auto);
   justify-content: center;
 
-  @media ${device.lg}{
+  @media ${device.lg} {
     grid-template-columns: repeat(auto-fill, 325px);
-    }
-  @media ${device.md}{
+  }
+  @media ${device.md} {
     grid-template-columns: repeat(auto-fill, 300px);
   }
-  @media ${device.sm}{
+  @media ${device.sm} {
     justify-content: space-around;
     grid-template-columns: repeat(auto-fill, 48vw);
     grid-gap: 0;
@@ -41,11 +42,26 @@ const Wrapper = styled.div`
 `;
 
 const Feed = () => {
+  const supabase = useSupabaseClient();
+  const [postData, setPostData] = useState([]);
+
+  const fetchPost = async () => {
+    const { data } = await supabase.from("posts").select("*");
+
+    setPostData(data);
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
+
   return (
     <Wrapper>
-
       <StyledFeed>
-        <Post />
+        {postData.map((item) => {
+          return <Post key={item.id} data={...item} />;
+        })}
       </StyledFeed>
     </Wrapper>
   );
