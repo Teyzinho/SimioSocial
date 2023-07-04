@@ -11,20 +11,16 @@ import { CiLogout,CiLogin } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
+import useGetProfileById from "@/hooks/useGetProfileById";
 
 const SideBar = () => {
-  const session = useSession();
   const supabase = useSupabaseClient()
-  const [profile, setProfile] = useState(null)
   const router = useRouter();
-
-  // const profileImg = "/icons/person-circle.svg";
-  // const profileImg = (profile?.avatar_url ?  profile?.avatar_url : "/icons/person-circle.svg");
-
   const [profileImg, setProfileImg] = useState("/icons/person-circle.svg");
-
-
   const pathName = usePathname();
+  const { user } = useUser();
+  const profile = useGetProfileById(user?.id);
   const routes = useMemo(() => [
     {
       icon: AiOutlineHome,
@@ -51,13 +47,12 @@ const SideBar = () => {
       href: "/saved_posts",
     },
     {
-      icon: profileImg,
+      icon: (user?.user_metadata.avatar_url || profileImg),
       label: "Perfil",
       active: pathName === "/profile",
       href: "/profile",
     },
   ]);
-
   const { openModal } = useModal();
 
   const logout = async () => {
@@ -65,24 +60,8 @@ const SideBar = () => {
     setProfileImg("/icons/person-circle.svg"); // Redefinir a imagem do perfil imediatamente
     router.refresh();
   }
-
-  useEffect(() => {
-    if(session){
-      supabase.from('profiles')
-      .select('*')
-      .eq('id', session.user.id)
-      .then(result => {
-        if(result.data.length){
-          setProfile(result.data[0])
-        }
-      })
-    }
-  }, [session])
-
-  useEffect(() => {
-    const avatarUrl = profile?.avatar_url || "/icons/person-circle.svg";
-    setProfileImg(avatarUrl);
-  }, [profile]);
+  
+  console.log(profile?.avatar_url)
 
   return (
     <WrapSideBar>
@@ -93,7 +72,7 @@ const SideBar = () => {
 
         {/* Logar e Deslogar*/}
 
-        {session ? (
+        {user ? (
           <SideBarButton onClick={logout}>
             <CiLogout />
             <p>Deslogar</p>

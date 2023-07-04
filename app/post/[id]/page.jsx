@@ -1,9 +1,16 @@
-import FullPost from '@/src/components/posts/FullPost'
 
-const Post = () => {
+
+import FullPost from '@/src/components/posts/FullPost'
+import Feed from '@/src/components/Feed/Feed'
+
+const Post = async ({params: {id}}) => {
+
+  
   return (
     <main>
-      <FullPost />
+      <FullPost postId={id}/>
+
+      <Feed />
     </main>
   )
 }

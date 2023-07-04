@@ -113,7 +113,7 @@ const CreatePost = () => {
 
       if (supabaseError) {
         setIsLoading(false);
-        return console.log("Supabase Error");
+        return console.log("Supabase Error",supabaseError);
       }
 
       router.refresh();

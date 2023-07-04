@@ -1,72 +1,44 @@
 "use client";
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { useSessionContext } from "@supabase/auth-helpers-react";
+
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+
 import { PostHeader } from "./Post.styles";
 import UserCard from "../userCard/UserCard";
 import PostReactions from "./PostReactions";
 import { IconButton } from "../buttons/IconButton";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
 import Comment from "../Comment/Comment";
 import Typography from "../display/Typography";
 import { Avatar } from "../pictures/Avatar";
 import { Input } from "../inputs/input";
 import { Button } from "../buttons/button";
-import { device } from "@/style/Breakpoints";
-import Feed from "@/src/components/Feed/Feed";
+import getPostById from "@/hooks/getPostById";
 
-const StyledFullPost = styled.div`
-  width: 1000px;
-  display: flex;
-  background-color: ${({ theme }) => theme.colors.neutral};
-  min-height: 500px;
-  margin: auto;
-  margin-top: 56px;
-  border-radius: 5px;
-  overflow: hidden;
+import {
+  StyledFullPost,
+  FullPostImgWrapper,
+  FullPostImg,
+  FullPostContent,
+  Wrapper,
+} from "./FullPost.styles";
+import useLoadImage from "@/hooks/useLoadImage";
 
-  @media ${device.md}{
-    width: 600px;
-    flex-direction: column;
+const FullPost = ({ postId }) => {
+  const { post, loading, error } = getPostById(postId);
+  const {session} = useSessionContext();
+  console.log(session)
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
-  @media ${device.sm} {
-    width: 95%;
-    flex-direction: column;
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
-  @media ${device.xs} {
-    width: 100%;
-    flex-direction: column;
-  }
-`;
 
-const FullPostImgWrapper = styled.div`
-  width: 100%;
-`;
+  const image_url = useLoadImage(post.image_url)
 
-const FullPostImg = styled.img`
-  width: 100%;
-  object-fit: cover;
-  border-radius: 5px;
-`;
-
-const FullPostContent = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  & > :last-child {
-    margin-top: auto;
-    padding: 0;
-  }
-`;
-
-const Wrapper = styled.div`
-  padding: 16px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`
-
-const FullPost = () => {
   const handleLikeClick = () => {
     console.log("Like click");
   };
@@ -93,67 +65,60 @@ const FullPost = () => {
 
   return (
     <main>
+      <StyledFullPost>
+        {/* Img */}
+        <FullPostImgWrapper>
+          <FullPostImg src={image_url} />
+        </FullPostImgWrapper>
 
-    <StyledFullPost>
-      {/* Img */}
-      <FullPostImgWrapper>
-        <FullPostImg src="/images/post1.png" />
-      </FullPostImgWrapper>
+        {/* Post Content */}
+        <FullPostContent>
+          <Wrapper>
+            {/* Header */}
+            <PostHeader>
+              {/* Prodifile */}
+              <UserCard followBtn={true} userId={post.user_id}/>
+              {/* Button 3 dots */}
+              <IconButton onClick={handleDotsClick}>
+                <BiDotsHorizontalRounded />
+              </IconButton>
+            </PostHeader>
+            <div>
+              <Typography variant="h2">{post.title}</Typography>
 
-      {/* Post Content */}
-      <FullPostContent>
-        <Wrapper>
-          {/* Header */}
-          <PostHeader>
-            {/* Prodifile */}
-            <UserCard followBtn={true} />
-            {/* Button 3 dots */}
-            <IconButton onClick={handleDotsClick}>
-              <BiDotsHorizontalRounded />
-            </IconButton>
-          </PostHeader>
-          <div>
-            <Typography variant="h2">Hello World!</Typography>
-
-            <Typography variant="desc" style={{ paddingTop: "16px" }}>
-              A vida é uma jornada repleta de desafios e conquistas. Às vezes,
-              nos deparamos com obstáculos que parecem insuperáveis, mas é
-              nesses momentos que descobrimos nossa força interior. Com
-              determinação e perseverança, somos capazes de superar qualquer
-              adversidade que se apresente em nosso caminho.
+              <Typography variant="desc" style={{ paddingTop: "16px" }}>
+                {post.description}
+              </Typography>
+            </div>
+            {/* Comentários */}
+            <Typography variant="h3" style={{ marginTop: "16px" }}>
+              Comentários
             </Typography>
-          </div>
-          {/* Comentários */}
-          <Typography variant="h3" style={{marginTop:"16px"}}>
-            Comentários
-          </Typography>
+            <div>
+              <Comment />
+            </div>
+          </Wrapper>
+
           <div>
-            <Comment />
-          </div>
-        </Wrapper>
-
-        <div>
-          <PostReactions
-            handleLikeClick={handleLikeClick}
-            handleCommentClick={handleCommentClick}
-            handleShareClick={handleShareClick}
-            handleSaveClick={handleSaveClick}
-          />
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Avatar
-              src="/images/profile.png"
-              alt="profile-pct"
-              width={50}
-              height={50}
+            <PostReactions
+              handleLikeClick={handleLikeClick}
+              handleCommentClick={handleCommentClick}
+              handleShareClick={handleShareClick}
+              handleSaveClick={handleSaveClick}
             />
-            <Input placeholder="Deixe um comentário" />
-            <Button>Comentar</Button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Avatar
+                
+                alt="profile-pct"
+                width={50}
+                height={50}
+              />
+              <Input placeholder="Deixe um comentário" />
+              <Button>Comentar</Button>
+            </div>
           </div>
-        </div>
-      </FullPostContent>
-    </StyledFullPost>
-
-    <Feed />
+        </FullPostContent>
+      </StyledFullPost>
     </main>
   );
 };

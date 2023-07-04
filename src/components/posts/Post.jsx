@@ -52,8 +52,6 @@ const Post = ({ data }) => {
     fetchPost();
   }, []);
 
-  console.log("item: ",data)
-
   const handleLikeClick = () => {
     console.log("Like click");
   };

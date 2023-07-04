@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import Post from "../posts/Post";
 import styled from "styled-components";
