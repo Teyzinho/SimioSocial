@@ -14,6 +14,7 @@ import { Avatar } from "../pictures/Avatar";
 import { Input } from "../inputs/input";
 import { Button } from "../buttons/button";
 import getPostById from "@/hooks/getPostById";
+import { useUser } from "@/hooks/useUser";
 
 import {
   StyledFullPost,
@@ -26,8 +27,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 
 const FullPost = ({ postId }) => {
   const { post, loading, error } = getPostById(postId);
-  const {session} = useSessionContext();
-  console.log(session)
+  const {user} = useUser();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -77,7 +77,7 @@ const FullPost = ({ postId }) => {
             {/* Header */}
             <PostHeader>
               {/* Prodifile */}
-              <UserCard followBtn={true} userId={post.user_id}/>
+              <UserCard followBtn={true} userId={post.user_id} time={post?.created_at}/>
               {/* Button 3 dots */}
               <IconButton onClick={handleDotsClick}>
                 <BiDotsHorizontalRounded />

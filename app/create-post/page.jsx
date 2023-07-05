@@ -4,6 +4,7 @@
 //npm i uniqid
 //npm i -D @types/uniqid
 
+import { toast } from "react-hot-toast";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import uniqid from "uniqid";
 import React, { useEffect, useRef, useState } from "react";
@@ -79,7 +80,9 @@ const CreatePost = () => {
       const imageFile = watch("image");
 
       if (!imageFile || !session) {
-        console.log("campos ausentes");
+        toast.error("Campos Ausentes");
+        console.log("Campos Ausentes");
+        setIsLoading(false);
         return;
       }
 
@@ -95,7 +98,8 @@ const CreatePost = () => {
 
       if (imgError) {
         setIsLoading(false);
-        return console.log("Upload da imagem falhou!");
+        
+        return toast.error("Upload da imagem falhou!");;
       }
 
       const tagsArray = tags.map((tag) => tag);
@@ -113,15 +117,16 @@ const CreatePost = () => {
 
       if (supabaseError) {
         setIsLoading(false);
-        return console.log("Supabase Error",supabaseError);
+        return toast.error("Supabase Error");
       }
 
-      router.refresh();
+      router.push("/");
       setIsLoading(false);
-      console.log("Adicionado com sucesso!");
+      toast.success("Adicionado com sucesso!");
       reset();
+
     } catch (error) {
-      console.log("algo deu errado", error);
+      toast.error("algo deu errado");
     } finally {
       setIsLoading(false);
     }

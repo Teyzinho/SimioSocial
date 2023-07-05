@@ -61,7 +61,6 @@ const SideBar = () => {
     router.refresh();
   }
   
-  console.log(profile?.avatar_url)
 
   return (
     <WrapSideBar>

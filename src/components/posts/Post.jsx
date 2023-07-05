@@ -77,12 +77,13 @@ const Post = ({ data }) => {
     console.log("Dots click");
   };
 
+
   return (
     <PostCard>
       {/* Header */}
       <PostHeader>
         {/* profile */}
-        <UserCard userId={data.user_id}/>
+        <UserCard userId={data.user_id} time={data.created_at}/>
 
         {/* Button 3 dots */}
         <IconButton onClick={handleDotsClick}>

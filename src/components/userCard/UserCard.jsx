@@ -1,3 +1,6 @@
+//npm install date-fns
+import { formatDistanceToNow } from 'date-fns';
+
 import React, { useEffect, useState } from "react";
 import { Avatar } from "../pictures/Avatar";
 import styled from "styled-components";
@@ -30,23 +33,26 @@ const UserCardContainer = styled.div`
   }
 `;
 
-const UserCard = ({ followBtn, userId }) => {
+const UserCard = ({ followBtn, userId , time}) => {
   if(!userId){
     return null;
   }
   
   const user = useGetProfileById(userId);
 
+  const createdDate = new Date(time);
+  const timeAgo = formatDistanceToNow(createdDate, { addSuffix: false });
+
   return (
     <UserCardContainer>
-      <Avatar src={user?.avatar_url} alt="avatar" width={50} height={50} />
+      <Avatar src={user?.avatar_url} alt="avatar" width={40} height={40} />
       <div>
         <Username>
           <Typography variant="h4">{user?.full_name}</Typography>
           <Typography>{user?.full_name}</Typography>
         </Username>
         <Typography variant="weak" style={{ marginTop: "4px" }}>
-          2h atrás
+          {timeAgo}
         </Typography>
       </div>
       {followBtn && <Button>Seguir</Button>}

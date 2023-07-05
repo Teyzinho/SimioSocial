@@ -48,7 +48,7 @@ const Feed = () => {
   const [postData, setPostData] = useState([]);
 
   const fetchPost = async () => {
-    const { data } = await supabase.from("posts").select("*");
+    const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
 
     setPostData(data);
   };

@@ -4,7 +4,6 @@ import styled from "styled-components";
 export const StyledFullPost = styled.div`
   width: 1000px;
   display: flex;
-  align-items: center;
   background-color: ${({ theme }) => theme.colors.neutral};
   min-height: 500px;
   margin: auto;

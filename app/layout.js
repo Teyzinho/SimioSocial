@@ -17,6 +17,7 @@ import { Provider } from 'react-redux'
 import { store } from '@/store'
 import SupabaseProvider from '@/Providers/SupabaseProvider'
 import UserProvider from '@/Providers/UserProvider'
+import ToasterProvider from '@/Providers/ToasterProvider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body>
+      <ToasterProvider />
         <StyledComponentsRegistry>
           {/* Provider Redux */}
           <Provider store={store}>
@@ -55,19 +57,18 @@ export default function RootLayout({ children }) {
               {/* SupabaseProviders */}
               <SupabaseProvider>
                 <UserProvider>
-
-                  {/* Site */}
-                  <NavBar />
-                  <div style={{ display: 'flex', width: "100%" }}>
-                    <AuthModal />
-                    <SideBar />
-                    <ChildrenWrapper>
-                      {children}
-                    </ChildrenWrapper>
-                    <WhoFollow />
-                  </div>
+                  {/* Toast Privider */}
+                    {/* Site */}
+                    <NavBar />
+                    <div style={{ display: 'flex', width: "100%" }}>
+                      <AuthModal />
+                      <SideBar />
+                      <ChildrenWrapper>
+                        {children}
+                      </ChildrenWrapper>
+                      <WhoFollow />
+                    </div>
                 </UserProvider>
-
               </SupabaseProvider>
             </ThemeProvider>
           </Provider>
