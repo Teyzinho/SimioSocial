@@ -90,7 +90,7 @@ const LikeButton = ({ postId }) => {
           toast.error(error.message)
         }else{
           setIsLiked(true);
-          toast.success("Liked");
+          toast.success("Curtiu");
         }
     }
     router.refresh();

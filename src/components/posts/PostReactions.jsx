@@ -5,6 +5,7 @@ import { IconButton } from "../buttons/IconButton";
 import { StyledPostReactions } from "./Post.styles";
 import LikeButton from "../likeButton/LikeButton";
 import CommentButton from "../commentButton/CommentButton";
+import SavePostButton from "../savePostButton/SavePostButton";
 
 const PostReactions = ({
   postId
@@ -21,9 +22,7 @@ const PostReactions = ({
         <FiShare />
       </IconButton>
     {/* Save */}
-      <IconButton color="white">
-        <FiBookmark />
-      </IconButton>
+      <SavePostButton postId={postId}/>
     </StyledPostReactions>
   );
 };
