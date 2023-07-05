@@ -11,11 +11,11 @@ export const IconButton = styled.button`
   padding: 0;
   color: ${({ theme, color }) => color || theme.colors.primary};
   transition: all 0.2s;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 
   & svg {
-    width: ${({ width }) => width || "20px"};
-    height: 20px;
+    width: ${({ width }) => width || "17px"};
+    height: 17px;
     padding: ${({ padding }) => padding || "10px"};
     border-radius: 100%;
 

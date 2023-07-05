@@ -27,7 +27,7 @@ const UserCardContainer = styled.div`
   }
 
   &:hover {
-    ${Username} ${Typography}[variant="h4"] {
+    ${Username} ${Typography}[variant="semi_bold"] {
       text-decoration: underline;
     }
   }
@@ -48,8 +48,8 @@ const UserCard = ({ followBtn, userId , time}) => {
       <Avatar src={user?.avatar_url} alt="avatar" width={40} height={40} />
       <div>
         <Username>
-          <Typography variant="h4">{user?.full_name}</Typography>
-          <Typography>{user?.full_name}</Typography>
+          <Typography variant="semi_bold" >{user?.full_name}</Typography>
+          <Typography style={{fontSize:"0.9rem"}}>@{user?.full_name}</Typography>
         </Username>
         <Typography variant="weak" style={{ marginTop: "4px" }}>
           {timeAgo}

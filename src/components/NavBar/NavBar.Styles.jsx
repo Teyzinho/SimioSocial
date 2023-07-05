@@ -4,7 +4,7 @@ import { device } from "@/style/Breakpoints";
 export const Nav = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #0d0d0d;
+  background-color: ${({ theme }) => theme.colors.primary};
   display: flex;
   color: white;
   align-items: center;
@@ -18,7 +18,7 @@ export const Nav = styled.nav`
     font-family: ${({ theme }) => theme.fonts.roboto_condensed};
     font-style: normal;
     font-weight: 200;
-    font-size: 28px;
+    font-size: 1.5rem;
   }
 
   & a {

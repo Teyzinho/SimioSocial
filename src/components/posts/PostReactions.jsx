@@ -4,6 +4,7 @@ import { FaRegComment } from "react-icons/fa";
 import { IconButton } from "../buttons/IconButton";
 import { StyledPostReactions } from "./Post.styles";
 import LikeButton from "../likeButton/LikeButton";
+import CommentButton from "../commentButton/CommentButton";
 
 const PostReactions = ({
   postId
@@ -13,10 +14,8 @@ const PostReactions = ({
       {/* Headt Button */}
       <LikeButton postId={postId}/>
     {/* Comment */}
-      <IconButton color="white">
-        <FaRegComment />
-        20
-      </IconButton>
+      <CommentButton postId={postId}/>
+      
     {/* Share */}
       <IconButton color="white">
         <FiShare />

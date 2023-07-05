@@ -12,7 +12,7 @@ export const PostHeader = styled.div`
 export const StyledPostReactions = styled.div`
   width: 100%;
   display: flex;
-  background-color: ${({theme}) => theme.colors.primary};
+  background-color: #212226;
   color: white;
   gap: 4px;
 
