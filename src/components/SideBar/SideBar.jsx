@@ -58,7 +58,7 @@ const SideBar = () => {
   const logout = async () => {
     await supabase.auth.signOut();
     setProfileImg("/icons/person-circle.svg"); // Redefinir a imagem do perfil imediatamente
-    router.refresh();
+    router.replace("/");
   }
   
 

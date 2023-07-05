@@ -39,22 +39,6 @@ const FullPost = ({ postId }) => {
 
   const image_url = useLoadImage(post.image_url)
 
-  const handleLikeClick = () => {
-    console.log("Like click");
-  };
-
-  const handleCommentClick = () => {
-    console.log("Comment click");
-  };
-
-  const handleShareClick = () => {
-    console.log("Share click");
-  };
-
-  const handleSaveClick = () => {
-    console.log("Save click");
-  };
-
   const handlePostClick = () => {
     console.log("Post click");
   };
@@ -101,10 +85,7 @@ const FullPost = ({ postId }) => {
 
           <div>
             <PostReactions
-              handleLikeClick={handleLikeClick}
-              handleCommentClick={handleCommentClick}
-              handleShareClick={handleShareClick}
-              handleSaveClick={handleSaveClick}
+              postId={postId}
             />
             <div style={{ display: "flex", alignItems: "center" }}>
               <Avatar

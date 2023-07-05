@@ -52,22 +52,6 @@ const Post = ({ data }) => {
     fetchPost();
   }, []);
 
-  const handleLikeClick = () => {
-    console.log("Like click");
-  };
-
-  const handleCommentClick = () => {
-    console.log("Comment click");
-  };
-
-  const handleShareClick = () => {
-    console.log("Share click");
-  };
-
-  const handleSaveClick = () => {
-    console.log("Save click");
-  };
-
   const handlePostClick = () => {
     console.log("Post click");
     router.push(`/post/${data.id}`);
@@ -98,10 +82,7 @@ const Post = ({ data }) => {
 
       {/* Post Reactions  */}
       <PostReactions
-        handleLikeClick={handleLikeClick}
-        handleCommentClick={handleCommentClick}
-        handleShareClick={handleShareClick}
-        handleSaveClick={handleSaveClick}
+        postId={data.id}
       />
     </PostCard>
   );
