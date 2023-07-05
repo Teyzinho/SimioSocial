@@ -11,20 +11,18 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
 
 const PostCard = styled.div`
-  width: 350px;
-  height: fit-content;
-  background-color: ${({ theme }) => theme.colors.neutral};
-  border-radius: 5px;
+  margin-left:15px; /* gutter size */
+  background-clip: padding-box;
 
-  @media ${device.lg} {
-    width: 325px;
-  }
-  @media ${device.md} {
-    width: 300px;
-  }
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #73737361;
+  background-color: ${({ theme }) => theme.colors.neutral};
+
   @media ${device.sm} {
-    width: 100%;
-  }
+    margin-left:5px;
+    margin-bottom: 5px;
+  } 
 `;
 
 const PostImg = styled.img`
