@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/Ai";
+import Typography from "../display/Typography";
+import { Button } from "../buttons/button";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -24,8 +26,10 @@ const Modal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 16px;
 
   color: #fff;
+
 `;
 
 const ConfirmationModal = ({ title, message, onClose, callback }) => {
@@ -42,12 +46,12 @@ const ConfirmationModal = ({ title, message, onClose, callback }) => {
   return (
     <ModalContainer>
       <Modal>
-        <p>{title}</p>
+        <Typography variant="h1" style={{ color:"red" }}>{title}</Typography>
         <p>{message}</p>
 
-        <div style={{ display: "flex" }}>
-          <button onClick={handleCancel}>Cancelar</button>
-          <button onClick={handleConfirm}>Confirmar</button>
+        <div style={{ display: "flex", justifyContent:"center", gap:"15px" }}>
+          <Button style={{color: "white"}} onClick={handleCancel}>Cancelar</Button>
+          <Button style={{backgroundColor: "red" }} onClick={handleConfirm}>Confirmar</Button>
         </div>
       </Modal>
     </ModalContainer>
