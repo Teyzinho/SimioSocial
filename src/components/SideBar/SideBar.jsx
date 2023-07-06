@@ -60,8 +60,11 @@ const SideBar = () => {
     setProfileImg("/icons/person-circle.svg"); // Redefinir a imagem do perfil imediatamente
     router.replace("/");
   }
-  
 
+  const logIn = () =>{
+    openModal("auth");
+  }
+  
   return (
     <WrapSideBar>
       <StySideBar>
@@ -77,7 +80,7 @@ const SideBar = () => {
             <p>Deslogar</p>
           </SideBarButton>
         ) : (
-          <SideBarButton onClick={openModal}>
+          <SideBarButton onClick={logIn}>
             <CiLogin />
             <p>Logar</p>
           </SideBarButton>

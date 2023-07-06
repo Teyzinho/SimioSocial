@@ -7,6 +7,7 @@ export const PostHeader = styled.div`
   height: 70px;
   justify-content: space-between;
   align-items: center;
+  position:relative;
 `;
 
 export const StyledPostReactions = styled.div`

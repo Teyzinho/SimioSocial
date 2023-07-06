@@ -11,8 +11,7 @@ import { AiFillHeart , AiOutlineHeart } from "react-icons/Ai";
 
 import { IconButton } from "../buttons/IconButton";
 
-const LikeButton = ({ postId }) => {
-  const { user } = useUser();
+const LikeButton = ({ postId, user }) => {
   const router = useRouter();
   const { supabaseClient } = useSessionContext();
 

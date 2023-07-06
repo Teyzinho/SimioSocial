@@ -18,6 +18,8 @@ import { store } from '@/store'
 import SupabaseProvider from '@/Providers/SupabaseProvider'
 import UserProvider from '@/Providers/UserProvider'
 import ToasterProvider from '@/Providers/ToasterProvider'
+import ConfirmarionModal from '@/src/components/modal/ConfirmationModal'
+import ModalRender from '@/src/components/modal/ModalRender'
 
 export const metadata = {
   title: 'Create Next App',
@@ -61,7 +63,8 @@ export default function RootLayout({ children }) {
                     {/* Site */}
                     <NavBar />
                     <div style={{ display: 'flex', width: "100%" }}>
-                      <AuthModal />
+                      <ModalRender/>
+                      
                       <SideBar />
                       <ChildrenWrapper>
                         {children}

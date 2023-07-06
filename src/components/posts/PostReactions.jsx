@@ -8,12 +8,13 @@ import CommentButton from "../commentButton/CommentButton";
 import SavePostButton from "../savePostButton/SavePostButton";
 
 const PostReactions = ({
-  postId
+  postId,
+  user
 }) => {
   return (
     <StyledPostReactions>
       {/* Headt Button */}
-      <LikeButton postId={postId}/>
+      <LikeButton postId={postId} user={user}/>
     {/* Comment */}
       <CommentButton postId={postId}/>
       
@@ -22,7 +23,7 @@ const PostReactions = ({
         <FiShare />
       </IconButton>
     {/* Save */}
-      <SavePostButton postId={postId}/>
+      <SavePostButton postId={postId} user={user}/>
     </StyledPostReactions>
   );
 };

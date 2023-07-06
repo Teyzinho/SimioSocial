@@ -1,12 +1,10 @@
 "use client";
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/Ai";
 import useModal from "@/src/features/modal/useModal";
-
 
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import {useSessionContext, useSupabaseClient} from "@supabase/auth-helpers-react"
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -46,31 +44,26 @@ const CloseButton = styled.button`
   color: white;
 `;
 
-const AuthModal = ({ handleCloseLoginModal }) => {
+const AuthModal = ({ onClose }) => {
 
   // const supabase = createClientComponentClient()
   const supabaseClient = useSupabaseClient();
   const {session} = useSessionContext();
   const router = useRouter();
 
-  const { isOpen, closeModal } = useModal();
 
   useEffect(() => {
     if(session){
-      closeModal();
+      onClose();
     }
     
-  },[session, router, closeModal]);
+  },[session, router, onClose]);
 
-  
-  if (!isOpen) {
-    return null; // Retorne null ou adicione uma mensagem de erro aqui
-  }
 
   return (
     <LoginContainer>
       <LoginModal>
-        <CloseButton onClick={closeModal}>
+        <CloseButton onClick={onClose}>
           <AiOutlineClose />
         </CloseButton>
         <div>

@@ -1,7 +1,6 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import { IconButton } from "../buttons/IconButton";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
 import styled from "styled-components";
 import { PostHeader } from "./Post.styles";
 import UserCard from "../userCard/UserCard";
@@ -9,6 +8,8 @@ import PostReactions from "./PostReactions";
 import { device } from "@/style/Breakpoints";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
+import DotsButton from "../dotsButton/DotsButton";
+import { useUser } from "@/hooks/useUser";
 
 const PostCard = styled.div`
   margin-left:15px; /* gutter size */
@@ -35,6 +36,8 @@ const PostImg = styled.img`
 `;
 
 const Post = ({ data }) => {
+  const {user} = useUser();
+
   const supabase = useSupabaseClient();
   const router = useRouter();
   const [imgPath, setImgPath] = useState("");
@@ -55,11 +58,6 @@ const Post = ({ data }) => {
     router.push(`/post/${data.id}`);
   };
 
-  const handleDotsClick = () => {
-    console.log("Dots click");
-  };
-
-
   return (
     <PostCard>
       {/* Header */}
@@ -68,9 +66,8 @@ const Post = ({ data }) => {
         <UserCard userId={data.user_id} time={data.created_at}/>
 
         {/* Button 3 dots */}
-        <IconButton onClick={handleDotsClick}>
-          <BiDotsHorizontalRounded />
-        </IconButton>
+        <DotsButton userId={user?.id} post={data}/>
+
       </PostHeader>
 
       {/* Image */}
@@ -81,6 +78,7 @@ const Post = ({ data }) => {
       {/* Post Reactions  */}
       <PostReactions
         postId={data.id}
+        user={user}
       />
     </PostCard>
   );
