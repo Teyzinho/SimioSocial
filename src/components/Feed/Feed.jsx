@@ -28,6 +28,9 @@ const Wrapper = styled.div`
 
 const Feed = ({feed : postData , isLoading}) => {
 
+  if(isLoading){
+    return <div>Loading</div>
+  }
 
   return (
     <Wrapper>

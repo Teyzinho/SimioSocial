@@ -5,9 +5,7 @@ import Typography from "@/src/components/display/Typography";
 import { Avatar } from "@/src/components/pictures/Avatar";
 import Feed from "@/src/components/Feed/Feed";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import useFetchProfilePosts from "@/hooks/useFetchUserProfile";
-import useGetProfileById from "@/hooks/useGetProfileById";
+import {useState } from "react";
 
 const ProfileCard = styled.div`
   width:90%;
@@ -60,10 +58,8 @@ const TabButton = ({ label, active, onClick }) => {
 const Profile = () => {
 
   const [activeTab, setActiveTab] = useState("Posts");
-  const {feed , isLoadingData , user} = useFetchProfilePosts();
-  const profile = useGetProfileById(user?.id)
 
-  console.log(profile)
+
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -162,7 +158,7 @@ const Profile = () => {
     <div 
       style={{paddingTop:"26px"}}
     >
-      <Feed feed={feed} isLoading={isLoadingData}/>
+      <Feed />
     </div>
 
     </main>

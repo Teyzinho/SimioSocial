@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "./useUser";
 import { useRouter } from "next/navigation";
 
-const useFetchSavedPosts = () => {
+const useFetchUserProfile = () => {
   const router = useRouter();
   const { openModal } = useModal();
   const supabase = useSupabaseClient();
@@ -25,8 +25,8 @@ const useFetchSavedPosts = () => {
 
       try {
         const { data, error } = await supabase
-          .from("saved_posts")
-          .select("*, posts(*)")
+          .from("posts")
+          .select("*")
           .order("created_at", { ascending: false })
           .eq("user_id", user?.id);
 
@@ -47,7 +47,7 @@ const useFetchSavedPosts = () => {
     }
   }, [supabase, user, isLoading]);
 
-  return { feed: feed.map((item) => ({ ...item.posts })), isLoadingData };
+  return { feed , isLoadingData , user };
 };
 
-export default useFetchSavedPosts;
+export default useFetchUserProfile;

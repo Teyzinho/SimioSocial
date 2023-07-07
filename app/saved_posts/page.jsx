@@ -5,15 +5,13 @@ import Feed from "@/src/components/Feed/Feed";
 
 const Saved_Posts = () => {
 
-  const {feed} = useFetchSavedPosts();
-
-  console.log("feed", feed)
+  const {feed , isLoadingData} = useFetchSavedPosts();
 
   return (
     <main>
       Saved_Posts
       
-      <Feed feed={feed} />
+      <Feed feed={feed} isLoading={isLoadingData}/>
     </main>
   );
 };
