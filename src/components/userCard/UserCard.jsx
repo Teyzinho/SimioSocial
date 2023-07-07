@@ -8,6 +8,7 @@ import { Button } from "../buttons/button";
 import Typography from "../display/Typography";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useGetProfileById from "@/hooks/useGetProfileById";
+import { useRouter } from 'next/navigation';
 
 const Username = styled.span`
   display: flex;
@@ -34,6 +35,8 @@ const UserCardContainer = styled.div`
 `;
 
 const UserCard = ({ followBtn, userId , time}) => {
+  const router = useRouter();
+
   if(!userId){
     return null;
   }
@@ -43,11 +46,15 @@ const UserCard = ({ followBtn, userId , time}) => {
   const createdDate = new Date(time);
   const timeAgo = formatDistanceToNow(createdDate, { addSuffix: false });
 
+  const handleClick = () => {
+    router.replace(`/profile/${user.full_name}`)
+  }
+
   return (
     <UserCardContainer>
       <Avatar src={user?.avatar_url} alt="avatar" width={40} height={40} />
       <div>
-        <Username>
+        <Username onClick={handleClick}>
           <Typography variant="semi_bold" >{user?.full_name}</Typography>
           <Typography style={{fontSize:"0.9rem"}}>@{user?.full_name}</Typography>
         </Username>

@@ -5,7 +5,11 @@ import Typography from "@/src/components/display/Typography";
 import { Avatar } from "@/src/components/pictures/Avatar";
 import Feed from "@/src/components/Feed/Feed";
 import styled from "styled-components";
-import {useState } from "react";
+import { useState } from "react";
+import useFetchProfilePosts from "@/hooks/useFetchUserProfile";
+import useGetProfileById from "@/hooks/useGetProfileById";
+import useFetchSavedPosts from "@/hooks/useFetchSavedPosts";
+import useFetchSavedPostsByUserName from "@/hooks/useFetchSavedByUserName";
 
 const ProfileCard = styled.div`
   width:90%;
@@ -55,11 +59,13 @@ const TabButton = ({ label, active, onClick }) => {
   );
 };
 
-const Profile = () => {
+const Profile = ({params}) => {
 
   const [activeTab, setActiveTab] = useState("Posts");
+  const {feed , isLoadingData , profile} = useFetchProfilePosts(params.user_name);
+  const {feed: savedFeed, isLoadingData: isLoadingSaved} = useFetchSavedPostsByUserName(params.user_name)
 
-
+  console.log(params.user_name)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -158,7 +164,13 @@ const Profile = () => {
     <div 
       style={{paddingTop:"26px"}}
     >
-      <Feed />
+      {activeTab === "Posts"
+        ?
+          <Feed feed={feed} isLoading={isLoadingData}/>
+        :
+          <Feed feed={savedFeed} isLoading={isLoadingSaved}/>
+      }
+      
     </div>
 
     </main>

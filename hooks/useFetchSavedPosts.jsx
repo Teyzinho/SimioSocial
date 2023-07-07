@@ -5,6 +5,7 @@ import { useUser } from "./useUser";
 import { useRouter } from "next/navigation";
 
 const useFetchSavedPosts = () => {
+  
   const router = useRouter();
   const { openModal } = useModal();
   const supabase = useSupabaseClient();

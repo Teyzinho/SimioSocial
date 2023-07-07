@@ -52,7 +52,7 @@ const SideBar = () => {
       icon: (user?.user_metadata.avatar_url || profileImg),
       label: "Perfil",
       active: pathName === "/profile",
-      href: "/profile",
+      href: `/profile/${profile?.full_name}`,
     },
   ]);
   const { openModal } = useModal();

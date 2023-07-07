@@ -1,23 +1,31 @@
-import useModal from "@/src/features/modal/useModal";
+
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import { useUser } from "./useUser";
-import { useRouter } from "next/navigation";
 
-const useFetchUserProfile = () => {
-  const router = useRouter();
-  const { openModal } = useModal();
+const useFetchUserProfile = (userName) => {
   const supabase = useSupabaseClient();
-  const { user, isLoading } = useUser();
   const [feed, setFeed] = useState([]);
   const [isLoadingData, setIsLoadingData] = useState(true);
+  const [profile, setProfile] = useState(null);
+  const [loadingProfile, setIsLoadingProfile] = useState(false)
 
   useEffect(() => {
-    if (!user && !isLoading) {
-      router.replace("/");
-      openModal("auth");
-    }
-  }, [user, isLoading, router, openModal]);
+    const fetchProfile = async () => {
+      setIsLoadingProfile(true)
+        const { data, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("full_name", userName)
+            .single();
+        if (error) {
+            console.log("error fetching profile", error);
+        }
+        setProfile(data);
+        setIsLoadingProfile(false)
+    };
+
+    fetchProfile();
+}, [userName, supabase]);
 
   useEffect(() => {
     const fetchFeed = async () => {
@@ -28,7 +36,7 @@ const useFetchUserProfile = () => {
           .from("posts")
           .select("*")
           .order("created_at", { ascending: false })
-          .eq("user_id", user?.id);
+          .eq("user_id", profile?.id);
 
         if (error) {
           console.log("Error fetching feed", error);
@@ -42,12 +50,12 @@ const useFetchUserProfile = () => {
       setIsLoadingData(false);
     };
 
-    if (user && !isLoading) {
+    if (profile && !loadingProfile) {
       fetchFeed();
     }
-  }, [supabase, user, isLoading]);
+  }, [supabase, profile, loadingProfile]);
 
-  return { feed , isLoadingData , user };
+  return { feed , isLoadingData , profile };
 };
 
 export default useFetchUserProfile;
