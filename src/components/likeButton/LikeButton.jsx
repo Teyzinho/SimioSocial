@@ -62,7 +62,7 @@ const LikeButton = ({ postId, user }) => {
 
   const handleLike = async () =>{
     if(!user){
-      return authModal.openModal();
+      return authModal.openModal("auth");
     }
 
     if(isLiked){

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserCard from "../userCard/UserCard";
 import Typography from "../display/Typography";
 import styled from "styled-components";
-import { IconButton } from "../buttons/IconButton";
-import { FiHeart } from "react-icons/fi";
+import { useSessionContext } from "@supabase/auth-helpers-react";
+import { Avatar } from "../pictures/Avatar";
 
 const CommentWrapper = styled.div`
   display: flex;
@@ -21,7 +21,27 @@ const CommentContent = styled.div`
   padding-top: 6px;
 `;
 
-const Comment = () => {
+const Comment = ({ postId }) => {
+  const { supabaseClient } = useSessionContext();
+  const [comment, setComment] = useState([]);
+
+  useEffect(() => {
+    const fetchComment = async () => {
+      const { data, error } = await supabaseClient
+        .from("comments")
+        .select("*")
+        .eq("post_id", postId);
+
+      if (error) {
+        console.log("error fetching comments", error);
+      }
+
+      setComment(data);
+    };
+
+    fetchComment();
+  }, [postId]);
+
   return (
     <CommentWrapper>
       <UserCardWrapper>
@@ -29,18 +49,22 @@ const Comment = () => {
       </UserCardWrapper>
 
       <CommentContent>
-        <Typography variant="comment">
-          E perseverança, somos capazes de superar qualquer adversidade que se
-          apresente em nosso caminho.
-        </Typography>
-        <div style={{display:"flex", marginTop:"8px", gap:"5px"}}>
-          <Typography variant="semi_bold">Responder</Typography>
-
-          <IconButton padding="0" width="18px">
-            <FiHeart />
-            20
-          </IconButton>
-        </div>
+        {comment.length !== 0 ? (
+          <>
+            {comment.map((item) => {
+              return (
+                <div key={item.id}>
+                  <UserCard userId={item.user_id} time={item.created_at}/>
+                  <Typography variant="comment"  style={{paddingLeft:"50px"}}>
+                    {item.content}
+                  </Typography>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <Typography variant="comment">Não há comentarios</Typography>
+        )}
       </CommentContent>
     </CommentWrapper>
   );

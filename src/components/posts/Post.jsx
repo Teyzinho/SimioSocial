@@ -10,6 +10,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
 import DotsButton from "../dotsButton/DotsButton";
 import { useUser } from "@/hooks/useUser";
+import Link from "next/link";
 
 const PostCard = styled.div`
   margin-left:15px; /* gutter size */
@@ -53,11 +54,6 @@ const Post = ({ data }) => {
     fetchPost();
   }, []);
 
-  const handlePostClick = () => {
-    console.log("Post click");
-    router.push(`/post/${data.id}`);
-  };
-
   return (
     <PostCard>
       {/* Header */}
@@ -71,9 +67,9 @@ const Post = ({ data }) => {
       </PostHeader>
 
       {/* Image */}
-      <div onClick={handlePostClick}>
+      <Link href={`/post/${data.id}`}>
         <PostImg src={imgPath} alt="PostImg" />
-      </div>
+      </Link>
 
       {/* Post Reactions  */}
       <PostReactions

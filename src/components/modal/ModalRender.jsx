@@ -1,3 +1,5 @@
+"use client"
+
 import useModal from "@/src/features/modal/useModal";
 import AuthModal from "./AuthModal";
 import ConfirmationModal from "./ConfirmationModal";

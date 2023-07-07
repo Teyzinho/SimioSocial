@@ -27,6 +27,9 @@ export const StyledFullPost = styled.div`
 
 export const FullPostImgWrapper = styled.div`
   width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FullPostImg = styled.img`

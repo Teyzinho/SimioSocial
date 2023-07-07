@@ -42,7 +42,7 @@ const SavePostButton = ({ postId, user }) => {
 
   const handleSave = async () => {
     if (!user) {
-      return authModal.openModal();
+      return authModal.openModal("auth");
     }
 
     if (isSaved) {

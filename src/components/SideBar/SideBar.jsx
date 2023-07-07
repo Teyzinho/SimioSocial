@@ -1,3 +1,5 @@
+"use client"
+
 import { StySideBar, WrapSideBar } from "./SideBar.styles";
 import { SideBarButton } from "../../../src/components/buttons/button";
 import useModal from "@/src/features/modal/useModal";

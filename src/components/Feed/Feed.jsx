@@ -3,11 +3,9 @@
 //npm install react-masonry-css
 import Masonry from 'react-masonry-css'
 
-import React, { useEffect, useState } from "react";
 import Post from "../posts/Post";
 import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const StyledFeed = styled(Masonry)`
   display: -webkit-box; 
@@ -28,19 +26,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Feed = () => {
-  const supabase = useSupabaseClient();
-  const [postData, setPostData] = useState([]);
-
-  const fetchPost = async () => {
-    const { data } = await supabase.from("posts").select("*").order("created_at", { ascending: false });
-
-    setPostData(data);
-  };
-
-  useEffect(() => {
-    fetchPost();
-  }, []);
+const Feed = ({feed : postData , isLoading}) => {
 
 
   return (
@@ -53,7 +39,7 @@ const Feed = () => {
       }}
       columnClassName="masonry-grid-column"
       >
-        {postData.map((item) => {
+        {postData?.map((item) => {
           return <Post key={item.id} data={...item} />;
         })}
       </StyledFeed>

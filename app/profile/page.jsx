@@ -67,7 +67,7 @@ const Profile = () => {
 
   if(!session){
     router.replace("/");
-    openModal();
+    openModal("auth");
   }
 
   const handleTabClick = (tab) => {

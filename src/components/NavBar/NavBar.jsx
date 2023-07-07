@@ -23,6 +23,10 @@ const NavBar = () => {
     setInputValue(event.target.value);
   };
 
+  const logIn = () =>{
+    openModal("auth");
+  }
+
   useEffect(() => {
     if(session){
       supabase.from('profiles')
@@ -67,7 +71,7 @@ const NavBar = () => {
         </Link>
         </div>
       ) : (
-        <Button onClick={openModal}>Logar</Button>
+        <Button onClick={logIn}>Logar</Button>
       )}
     </Nav>
   );

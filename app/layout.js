@@ -1,13 +1,13 @@
 "use client"
+
 import './globals.css'
 import { theme } from '@/style/Theme'
 import { GlobalStyles } from '@/style/Global'
 import SideBar from '@/src/components/SideBar/SideBar'
 import WhoFollow from '@/src/components/WhoFollow/WhoFollow'
-import AuthModal from '@/src/components/modal/AuthModal'
+import ModalRender from '@/src/components/modal/ModalRender'
 
 import { ThemeProvider, styled } from 'styled-components'
-
 
 import StyledComponentsRegistry from '@/lib/registry'
 import NavBar from '@/src/components/NavBar/NavBar'
@@ -18,8 +18,6 @@ import { store } from '@/store'
 import SupabaseProvider from '@/Providers/SupabaseProvider'
 import UserProvider from '@/Providers/UserProvider'
 import ToasterProvider from '@/Providers/ToasterProvider'
-import ConfirmarionModal from '@/src/components/modal/ConfirmationModal'
-import ModalRender from '@/src/components/modal/ModalRender'
 
 export const metadata = {
   title: 'Create Next App',
@@ -78,6 +76,5 @@ export default function RootLayout({ children }) {
         </StyledComponentsRegistry>
       </body>
     </html>
-
   )
 }

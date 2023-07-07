@@ -1,18 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
-
-import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 import { PostHeader } from "./Post.styles";
 import UserCard from "../userCard/UserCard";
 import PostReactions from "./PostReactions";
-import { IconButton } from "../buttons/IconButton";
 import Comment from "../Comment/Comment";
 import Typography from "../display/Typography";
-import { Avatar } from "../pictures/Avatar";
-import { Input } from "../inputs/input";
-import { Button } from "../buttons/button";
 import getPostById from "@/hooks/getPostById";
 import { useUser } from "@/hooks/useUser";
 
@@ -24,6 +17,8 @@ import {
   Wrapper,
 } from "./FullPost.styles";
 import useLoadImage from "@/hooks/useLoadImage";
+import DotsButton from "../dotsButton/DotsButton";
+import AddComment from "../addComment/AddComment";
 
 const FullPost = ({ postId }) => {
   const { post, loading, error } = getPostById(postId);
@@ -43,10 +38,6 @@ const FullPost = ({ postId }) => {
     console.log("Post click");
   };
 
-  const handleDotsClick = () => {
-    console.log("Dots click");
-  };
-
   return (
     <main>
       <StyledFullPost>
@@ -63,9 +54,7 @@ const FullPost = ({ postId }) => {
               {/* Prodifile */}
               <UserCard followBtn={true} userId={post.user_id} time={post?.created_at}/>
               {/* Button 3 dots */}
-              <IconButton onClick={handleDotsClick}>
-                <BiDotsHorizontalRounded />
-              </IconButton>
+              <DotsButton userId={user?.id} post={post}/>
             </PostHeader>
             <div>
               <Typography variant="h2">{post.title}</Typography>
@@ -79,24 +68,17 @@ const FullPost = ({ postId }) => {
               Comentários
             </Typography>
             <div>
-              <Comment />
+              <Comment postId={post?.id}/>
             </div>
           </Wrapper>
 
           <div>
             <PostReactions
               postId={postId}
+              user={user}
             />
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Avatar
-                
-                alt="profile-pct"
-                width={50}
-                height={50}
-              />
-              <Input placeholder="Deixe um comentário" />
-              <Button>Comentar</Button>
-            </div>
+            <AddComment user={user} postId={post.id}/>
+
           </div>
         </FullPostContent>
       </StyledFullPost>
