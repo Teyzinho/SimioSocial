@@ -9,9 +9,7 @@ const Saved_Posts = () => {
 
   return (
     <main>
-      Saved_Posts
-      
-      <Feed feed={feed} isLoading={isLoadingData}/>
+      <Feed feed={feed} isLoading={isLoadingData} title={"Posts Salvos"}/>
     </main>
   );
 };

@@ -31,3 +31,8 @@ export const ProfileTabButton = styled.div`
     position: absolute;
     bottom: -36px;
 `
+
+export const FeedContainer = styled.div`
+  width: 95%;
+  margin: auto;
+`

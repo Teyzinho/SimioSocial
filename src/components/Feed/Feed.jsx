@@ -12,7 +12,7 @@ const StyledFeed = styled(Masonry)`
   display: -ms-flexbox; 
   display: flex;
   margin:auto;
-  margin-top:57px;
+  margin-top:25px;
   width: 95%;
 
   @media ${device.sm} {
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Feed = ({feed : postData , isLoading}) => {
+const Feed = ({feed : postData , isLoading , title}) => {
 
   if(isLoading){
     return <div>Loading</div>
@@ -34,6 +34,8 @@ const Feed = ({feed : postData , isLoading}) => {
 
   return (
     <Wrapper>
+      <h1 style={{paddingLeft:"46px", marginTop:"25px"}}>{title}</h1>
+
       <StyledFeed
       breakpointCols={{
         default: 4,

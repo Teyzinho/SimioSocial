@@ -17,6 +17,7 @@ import {
   ProfileBanner,
   ProfileInfo,
   ProfileTabButton,
+  FeedContainer,
 } from "../components/profile.styles";
 import useModal from "@/src/features/modal/useModal";
 import useLoadImage from "@/hooks/useLoadImage";
@@ -146,11 +147,13 @@ const Profile = ({ params }) => {
       </ProfileCard>
 
       <div style={{ paddingTop: "26px" }}>
+      <FeedContainer>
         {activeTab === "Posts" ? (
-          <Feed feed={feed} isLoading={isLoadingData} />
+            <Feed feed={feed} isLoading={isLoadingData} title={"Posts"}/>
         ) : (
-          <Feed feed={savedFeed} isLoading={isLoadingSaved} />
+            <Feed feed={savedFeed} isLoading={isLoadingSaved} title={"Salvos"}/>
         )}
+        </FeedContainer>
       </div>
     </main>
   );

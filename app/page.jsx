@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main>
-      <Feed feed={feed} isLoading={isLoading}/>
+      <Feed feed={feed} isLoading={isLoading} title={"Página inicial"}/>
     </main>
   )
 }
