@@ -1,89 +1,69 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { Button } from "@/src/components/buttons/button";
 import Typography from "@/src/components/display/Typography";
 import { Avatar } from "@/src/components/pictures/Avatar";
 import Feed from "@/src/components/Feed/Feed";
-import styled from "styled-components";
-import { useState } from "react";
+
 import useFetchProfilePosts from "@/hooks/useFetchUserProfile";
-import useGetProfileById from "@/hooks/useGetProfileById";
-import useFetchSavedPosts from "@/hooks/useFetchSavedPosts";
 import useFetchSavedPostsByUserName from "@/hooks/useFetchSavedByUserName";
+import TabButton from "@/src/components/TabButton/TabButon";
+import { useUser } from "@/hooks/useUser";
 
-const ProfileCard = styled.div`
-  width:90%;
-  height: 350px;
-  background-color: ${({ theme }) => theme.colors.neutral};
-  margin: auto;
-  margin-top: 42px;
-  border-radius: 5px;
-  position: relative;
-`;
+import {
+  ProfileCard,
+  ProfileBanner,
+  ProfileInfo,
+  ProfileTabButton,
+} from "../components/profile.styles";
+import useModal from "@/src/features/modal/useModal";
+import useLoadImage from "@/hooks/useLoadImage";
 
-const ProfileBanner = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-`;
-
-const ProfileInfo = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const ProfileTabButton = styled.div`
-    position: absolute;
-    bottom: -36px;
-`
-
-const TabButtonContainer = styled.button`
-  background-color: ${({ active }) => (active ? "lightblue" : "transparent")};
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: ${({ active }) => (active ? "bold" : "normal")};
-`;
-
-const TabButton = ({ label, active, onClick }) => {
-  return (
-    <TabButtonContainer active={active ? "true" : undefined} onClick={onClick}>
-      {label}
-    </TabButtonContainer>
-  );
-};
-
-const Profile = ({params}) => {
-
+const Profile = ({ params }) => {
   const [activeTab, setActiveTab] = useState("Posts");
-  const {feed , isLoadingData , profile} = useFetchProfilePosts(params.user_name);
-  const {feed: savedFeed, isLoadingData: isLoadingSaved} = useFetchSavedPostsByUserName(params.user_name)
+  const [isUser, setIsUser] = useState(false);
+  const { user } = useUser();
+  const {openModal} = useModal();
 
-  console.log(params.user_name)
+  const { feed, isLoadingData, profile } = useFetchProfilePosts(
+    params.user_name
+  );
+  const { feed: savedFeed, isLoadingData: isLoadingSaved } =
+    useFetchSavedPostsByUserName(params.user_name);
+
+  useEffect(() => {
+    if (user?.id === profile?.id) {
+      setIsUser(true);
+    }
+  }, [user, profile]);
+
+  const bannerImg = useLoadImage(profile?.banner_url)
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
-  const handleFollowersClick = () =>{
-    console.log("seguidores")
-  }
+  const handleFollowersClick = () => {
+    console.log("seguidores");
+  };
 
-  const handleFollowingClick = () =>{
-    console.log("seguindo")
+  const handleFollowingClick = () => {
+    console.log("seguindo");
+  };
+
+  const handleEdit = () => {
+    openModal("edit", {
+      profile: profile
+    })
   }
 
   return (
     <main>
       <ProfileCard>
         {/* Banner */}
-        <ProfileBanner src="/images/banner.jpg" alt="banner" />
+        <ProfileBanner src={bannerImg ? bannerImg : "/images/banner.jpg"} alt="banner" />
 
         {/* Perfil Info */}
         <ProfileInfo>
@@ -97,54 +77,56 @@ const Profile = ({params}) => {
           <Typography>{profile?.full_name}</Typography>
         </ProfileInfo>
 
-        <Button 
-        style={{
-            marginLeft:"auto",
-            marginRight:"10px",
-            marginTop:"10px"
-        }}
-        >
-            Seguir
-        </Button>
+{/* Botão seguir e editar perfil */}
+        {isUser ? (
+          <Button
+            style={{
+              marginLeft: "auto",
+              marginRight: "10px",
+              marginTop: "10px",
+              width:"80px"
+            }}
 
-        <div 
-        style={{
-            display:"flex",
-            justifyContent:"flex-end",
-            gap:"16px",
-            alignSelf:"flex-end",
-            marginTop:"75px",
-            marginRight:"15px"
-        }}>
+            onClick={handleEdit}
+          >
+            Editar Perfil
+          </Button>
+        ) : (
+          <Button
+            style={{
+              marginLeft: "auto",
+              marginRight: "10px",
+              marginTop: "10px",
+            }}
+          >
+            Seguir
+          </Button>
+        )}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: "16px",
+            alignSelf: "flex-end",
+            marginTop: "75px",
+            marginRight: "15px",
+          }}
+        >
           {/* Seguidores */}
-            <span 
-              style={{display:"flex", gap:"8px", cursor:"pointer"}}
-            >
-                <Typography 
-                  onClick={handleFollowersClick}
-                variant="semi_bold"
-                >
-                    Seguidores
-                </Typography>
-                <Typography style={{fontSize:"0.9rem"}}>
-                    20
-                </Typography>
-            </span>
-            {/* Seguindo */}
-            <span 
-              style={{display:"flex", gap:"8px",cursor:"pointer"}}
-            >
-                <Typography 
-                  onClick={handleFollowingClick}
-                variant="semi_bold">
-                    Seguindo
-                </Typography>
-                <Typography 
-                  style={{fontSize:"0.9rem"}}
-                >
-                    20
-                </Typography>
-            </span>
+          <span style={{ display: "flex", gap: "8px", cursor: "pointer" }}>
+            <Typography onClick={handleFollowersClick} variant="semi_bold">
+              Seguidores
+            </Typography>
+            <Typography style={{ fontSize: "0.9rem" }}>20</Typography>
+          </span>
+          {/* Seguindo */}
+          <span style={{ display: "flex", gap: "8px", cursor: "pointer" }}>
+            <Typography onClick={handleFollowingClick} variant="semi_bold">
+              Seguindo
+            </Typography>
+            <Typography style={{ fontSize: "0.9rem" }}>20</Typography>
+          </span>
         </div>
 
         <ProfileTabButton>
@@ -160,19 +142,14 @@ const Profile = ({params}) => {
           />
         </ProfileTabButton>
       </ProfileCard>
-    
-    <div 
-      style={{paddingTop:"26px"}}
-    >
-      {activeTab === "Posts"
-        ?
-          <Feed feed={feed} isLoading={isLoadingData}/>
-        :
-          <Feed feed={savedFeed} isLoading={isLoadingSaved}/>
-      }
-      
-    </div>
 
+      <div style={{ paddingTop: "26px" }}>
+        {activeTab === "Posts" ? (
+          <Feed feed={feed} isLoading={isLoadingData} />
+        ) : (
+          <Feed feed={savedFeed} isLoading={isLoadingSaved} />
+        )}
+      </div>
     </main>
   );
 };

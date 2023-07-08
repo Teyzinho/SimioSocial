@@ -9,7 +9,6 @@ import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import uniqid from "uniqid";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  SupabaseClient,
   useSessionContext,
   useSupabaseClient,
 } from "@supabase/auth-helpers-react";
@@ -99,7 +98,7 @@ const CreatePost = () => {
       if (imgError) {
         setIsLoading(false);
         
-        return toast.error("Upload da imagem falhou!");;
+        return toast.error("Upload da imagem falhou!");
       }
 
       const tagsArray = tags.map((tag) => tag);

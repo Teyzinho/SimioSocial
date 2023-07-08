@@ -66,7 +66,7 @@ const NavBar = () => {
           <Button style={{width:"100%"}}>Criar Post</Button>
         </Link>
 
-        <Link href="/profile" style={{width:"100%"}}>
+        <Link href={`/profile/${profile?.full_name}`} style={{width:"100%"}}>
           <Avatar src={profile?.avatar_url}/>
         </Link>
         </div>
