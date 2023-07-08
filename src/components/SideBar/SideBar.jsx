@@ -48,13 +48,14 @@ const SideBar = () => {
       active: pathName === "/saved_posts",
       href: "/saved_posts",
     },
-    {
-      icon: (user?.user_metadata.avatar_url || profileImg),
+    user && {
+      icon: user?.user_metadata.avatar_url || profileImg,
       label: "Perfil",
       active: pathName === `/profile/${profile?.full_name}`,
       href: `/profile/${profile?.full_name}`,
     },
-  ]);
+  ].filter(Boolean), [pathName, user, profileImg, profile]);
+
   const { openModal } = useModal();
 
   const logout = async () => {

@@ -25,7 +25,7 @@ const Profile = ({ params }) => {
   const [activeTab, setActiveTab] = useState("Posts");
   const [isUser, setIsUser] = useState(false);
   const { user } = useUser();
-  const {openModal} = useModal();
+  const { openModal } = useModal();
 
   const { feed, isLoadingData, profile } = useFetchProfilePosts(
     params.user_name
@@ -39,7 +39,7 @@ const Profile = ({ params }) => {
     }
   }, [user, profile]);
 
-  const bannerImg = useLoadImage(profile?.banner_url)
+  const bannerImg = useLoadImage(profile?.banner_url);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -55,15 +55,18 @@ const Profile = ({ params }) => {
 
   const handleEdit = () => {
     openModal("edit", {
-      profile: profile
-    })
-  }
+      profile: profile,
+    });
+  };
 
   return (
     <main>
       <ProfileCard>
         {/* Banner */}
-        <ProfileBanner src={bannerImg ? bannerImg : "/images/banner.jpg"} alt="banner" />
+        <ProfileBanner
+          src={bannerImg ? bannerImg : "/images/banner.jpg"}
+          alt="banner"
+        />
 
         {/* Perfil Info */}
         <ProfileInfo>
@@ -77,16 +80,15 @@ const Profile = ({ params }) => {
           <Typography>{profile?.full_name}</Typography>
         </ProfileInfo>
 
-{/* Botão seguir e editar perfil */}
+        {/* Botão seguir e editar perfil */}
         {isUser ? (
           <Button
             style={{
               marginLeft: "auto",
               marginRight: "10px",
               marginTop: "10px",
-              width:"80px"
+              width: "80px",
             }}
-
             onClick={handleEdit}
           >
             Editar Perfil

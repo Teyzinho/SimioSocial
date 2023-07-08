@@ -1,15 +1,20 @@
 "use client";
 
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/Ai";
-import useLoadImage from "@/hooks/useLoadImage";
 import { useRef, useState } from "react";
-import { BsTrashFill, BsUpload } from "react-icons/bs";
 import { RemoveImgButton } from "@/app/create-post/components/Post.styled";
-import { Avatar } from "../pictures/Avatar";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+
+import useLoadImage from "@/hooks/useLoadImage";
+import { Avatar } from "../pictures/Avatar";
+
+import { BsTrashFill, BsUpload } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/Ai";
+import {MdOutlineAddAPhoto} from "react-icons/md"
+import Image from "next/image";
+import { Button } from "../buttons/button";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -29,7 +34,7 @@ const Modal = styled.div`
   height: fit-content;
   border-radius: 5px;
   background-color: #212226;
-  padding: 25px 25px;
+  padding: 50px 25px;
 
   display: flex;
   flex-direction: column;
@@ -83,7 +88,33 @@ const FileButton = styled.button`
   }
 `;
 
-const AvatarFile = styled.div``;
+const AvatarFile = styled.div`
+  position:absolute;
+  margin:auto;
+
+  left:50%;
+  top:50%;
+
+  transform: translate(-50%);
+
+  & input{
+    display:none;
+  }
+`;
+
+const AvatarButton = styled.button`
+  display:flex;
+  align-items: center;
+  justify-content: center;
+`
+const AvatarSvgButton = styled.button`
+  color:#fff;
+  position:absolute;
+`
+const AvatarImg = styled(Image)`
+    border-radius: 100%;
+    object-fit: cover;
+`
 
 const EditProfileModal = ({ onClose, profile }) => {
   const supabaseClient = useSupabaseClient();
@@ -91,6 +122,7 @@ const EditProfileModal = ({ onClose, profile }) => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const bannerRef = useRef();
+  const avatarRef = useRef();
 
   const bannerImg = useLoadImage(profile?.banner_url);
   const profileImg = profile.avatar_url;
@@ -125,14 +157,38 @@ const EditProfileModal = ({ onClose, profile }) => {
     setValue("banner", file);
   };
 
-  const handleRemoveImage = () => {
+  const handleRemoveBanner = () => {
     setSelectedBanner(null);
     setValue("banner", null);
   };
 
+  // Avatar Functions
+  const handleOpenAvatar = () => {
+    if (avatarRef.current) {
+      avatarRef.current.click();
+    }
+  }
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      setSelectedAvatar(e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+    setValue("avatar", file);
+  };
+
+  const handleRemoveAvatar = () => {
+    setSelectedAvatar(null);
+    setValue("avatar", null);
+  };
+
+  // Função de enviar dados
   const onSubmit = async (values) => {
     console.log(values);
-
     try {
       setIsLoading(true);
       //Upload banner
@@ -184,14 +240,52 @@ const EditProfileModal = ({ onClose, profile }) => {
           onClose();
         }
       }
-
       // Update Avatar
       if (values.avatar) {
         //Verifica se a url da imagem é externa ou não
         if (isExternalUrl(profileImg)) {
-          
-        } else {
+          const { data: avatarData, error: avatarError } =
+            await supabaseClient.storage
+              .from("avatars")
+              .upload(`avatar-${profile.id}`, values.avatar, {
+                cacheControl: 3600,
+                upsert: false,
+              });
 
+          if (avatarError) {
+            setIsLoading(false);
+            return toast.error("Upload do Avatar falhou!");
+          }
+
+          const { error } = await supabaseClient
+            .from("profiles")
+            .update({ avatar_url: avatarData.path })
+            .eq("id", profile.id);
+
+          if (error) {
+            setIsLoading(false);
+            return toast.error("Supabase Error");
+          }
+          setIsLoading(false);
+          toast.success("Perfil atualizado com sucesso!");
+          onClose();
+          // Se o avatar não for externo
+        } else {
+          const { data: avatarData , error: avatarError } =
+            await supabaseClient.storage
+              .from("avatars")
+              .update(`avatar-${profile.id}`, values.avatar, {
+                cacheControl: 3600,
+                upsert: true,
+              });
+          if (avatarError) {
+            setIsLoading(false);
+            return toast.error("Upload do avatar falhou!");
+          }
+
+          setIsLoading(false);
+          toast.success("Perfil atualizado com sucesso!");
+          onClose();
         }
       }
     } catch (error) {
@@ -226,7 +320,7 @@ const EditProfileModal = ({ onClose, profile }) => {
             {selectedBanner ? (
               <>
                 <img src={selectedBanner} />
-                <RemoveImgButton onClick={handleRemoveImage}>
+                <RemoveImgButton type="button" onClick={handleRemoveBanner}>
                   <BsTrashFill />
                 </RemoveImgButton>
               </>
@@ -238,24 +332,47 @@ const EditProfileModal = ({ onClose, profile }) => {
             )}
           </BannerFile>
 
-          {/* Avatear */}
+          {/* Avatar */}
           <AvatarFile>
             <input
+              ref={avatarRef}
               type="file"
               accept="image/*"
-              id="avatarimg"
+              id="avatar"
+              name="avatar"
+              onChange={handleAvatarChange}
               disabled={isLoading}
             />
             {selectedAvatar ? (
-              <></>
-            ) : (
-              <Avatar
-                src={profileImg ? profileImg : "/images/profile.png"}
-                width={75}
+              <AvatarButton type="button">
+                <AvatarImg
+                  src={selectedAvatar}
+                  width={85}
+                  height={85}
               />
+                <AvatarSvgButton type="button" onClick={handleRemoveAvatar}>
+                  <BsTrashFill style={{color:"red"}}/>
+                </AvatarSvgButton>
+              </AvatarButton>
+            ) : (
+              <AvatarButton type="button" onClick={handleOpenAvatar}>
+                <Avatar
+                  src={profileImg ? profileImg : "/images/profile.png"}
+                  width={85}
+                  height={85}
+                />
+                <AvatarSvgButton type="button">
+                  <MdOutlineAddAPhoto />
+                </AvatarSvgButton>
+
+              </AvatarButton>
             )}
           </AvatarFile>
-          <button type="submit">Salvar</button>
+
+          <Button style={{marginLeft:"auto", marginTop:"20px"}} type="submit">
+            Salvar
+          </Button>
+
         </form>
       </Modal>
     </ModalContainer>
