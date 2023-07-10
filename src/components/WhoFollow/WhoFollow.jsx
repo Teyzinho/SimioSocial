@@ -3,32 +3,46 @@ import React, { useEffect, useState } from "react";
 import { WhoFollowCard, WhoFollowWrapper } from "./WhoFollow.Styles";
 import WhoFollowUser from "./WhoFollowUser";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
 
 const WhoFollow = () => {
+  const { user } = useUser();
   const supabase = useSupabaseClient();
   const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data, error } = await supabase.from("profiles").select("*");
-
-      if (error) {
+      try {
+        let query = supabase.from("profiles").select("*");
+    
+        if (user) {
+          query = query.neq("id", user.id);
+        }
+    
+        const { data, error } = await query;
+    
+        if (error) {
+          throw error;
+        }
+    
+        setProfiles(data || []);
+      } catch (error) {
         console.log("error fetching whofollow", error);
       }
-
-      setProfiles(data);
     };
 
     fetchUsers();
-  },[supabase]);
-
-  console.log(profiles)
+  }, [supabase, user]);
 
   return (
     <WhoFollowWrapper>
       <WhoFollowCard>
-        {profiles.map((user) => (
-          <WhoFollowUser key={`followUser${user.id}`} user={user}/>
+        {profiles.map((profile) => (
+          <WhoFollowUser
+            key={`followProfile${profile.id}`}
+            profile={profile}
+            user={user}
+          />
         ))}
       </WhoFollowCard>
     </WhoFollowWrapper>
