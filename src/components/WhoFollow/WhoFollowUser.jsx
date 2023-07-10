@@ -12,21 +12,21 @@ const Wrapper = styled.div`
   padding: 8px;
 `;
 
-const WhoFollowUser = () => {
+const WhoFollowUser = ({user}) => {
   return (
     <Wrapper>
       <div style={{ display: "flex" ,alignItems: "center",gap:"5px"}}>
         <Avatar
-          src="/images/profile.png"
+          src={user.avatar_url}
           alt="profile"
           width={50}
           height={50}
         />
         <div>
-          <Link href="">
-            <Typography variant="semi_bold">Tey</Typography>
+          <Link href={`/profile/${user.full_name}`}>
+            <Typography variant="semi_bold">{user.full_name}</Typography>
           </Link>
-          <Typography variant="weak">@Tey</Typography>
+          <Typography variant="weak">{user.full_name}</Typography>
         </div>
       </div>
       <Button bgcolor="transparent">Seguir</Button>

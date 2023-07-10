@@ -75,7 +75,6 @@ const Search = () => {
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsOpen(false);
-      setInputValue("");
     }
   };
 
@@ -110,6 +109,7 @@ const Search = () => {
                       <Link
                         href={`/profile/${item.full_name}`}
                         style={{
+                          width:"100%",
                           display: "flex",
                           alignItems: "center",
                           gap: "8px",
@@ -130,6 +130,8 @@ const Search = () => {
                           <Link
                             href={`/search/?search=${tag}`}
                             style={{
+                              width:"100%",
+                              height:"100%",
                               display: "flex",
                               alignItems: "center",
                               gap: "8px",

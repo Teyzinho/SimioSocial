@@ -69,8 +69,12 @@ export const UlContainer = styled.ul`
 
   & li {
     cursor: pointer;
-    padding:15px;
     background-color: ${({theme}) => theme.colors.neutral};
+
+    & a {
+      padding:15px;
+
+    }
 
     &:hover{
       filter: brightness(0.8);
