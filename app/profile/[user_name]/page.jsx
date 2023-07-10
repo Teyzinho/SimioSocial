@@ -149,9 +149,9 @@ const Profile = ({ params }) => {
       <div style={{ paddingTop: "26px" }}>
       <FeedContainer>
         {activeTab === "Posts" ? (
-            <Feed feed={feed} isLoading={isLoadingData} title={"Posts"}/>
+            <Feed feed={feed} isLoading={isLoadingData} title={feed.length === 0 ? "Sem Posts Ainda" : "Posts"}/>
         ) : (
-            <Feed feed={savedFeed} isLoading={isLoadingSaved} title={"Salvos"}/>
+            <Feed feed={savedFeed} isLoading={isLoadingSaved} title={savedFeed.length === 0 ? "Sem Posts Salvos" : "Salvos"}/>
         )}
         </FeedContainer>
       </div>

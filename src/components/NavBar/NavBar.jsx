@@ -1,27 +1,19 @@
 "use client";
-import { Nav, SearchContainer, GlassLabel } from "./NavBar.Styles";
+import { Nav } from "./NavBar.Styles";
 import Image from "next/image";
 import Link from "next/link";
-import { Input } from "@/src/components/inputs/input";
 import { Button } from "@/src/components/buttons/button";
 import { useEffect, useState } from "react";
-import { RxMagnifyingGlass } from "react-icons/rx";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import useModal from "@/src/features/modal/useModal";
 import { Avatar } from "../pictures/Avatar";
+import Search from "../search/Search";
 
 const NavBar = () => {
   const session = useSession();
   const { openModal } = useModal();
   const supabase = useSupabaseClient();
   const [profile, setProfile] = useState(null);
-
-  const [inputValue, setInputValue] = useState("");
-  const showGlassLabel = inputValue.length === 0;
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
 
   const logIn = () =>{
     openModal("auth");
@@ -39,6 +31,8 @@ const NavBar = () => {
       })
     }
   }, [session])
+  
+
 
   return (
     <Nav>
@@ -47,18 +41,7 @@ const NavBar = () => {
         <h1>SimioSocial</h1>
       </Link>
 
-      <SearchContainer>
-        <Input
-          id="search"
-          placeholder="Search"
-          value={inputValue}
-          onChange={handleChange}
-        />
-
-        <GlassLabel htmlFor="search" show={showGlassLabel ? "true" : undefined}>
-          <RxMagnifyingGlass />
-        </GlassLabel>
-      </SearchContainer>
+      <Search supabase={supabase}/>
 
       {session ? (
         <div style={{display:"flex", gap:"12px"}}>

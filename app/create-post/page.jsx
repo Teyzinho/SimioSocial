@@ -109,7 +109,7 @@ const CreatePost = () => {
           user_id: session.user.id,
           title: values.title,
           description: values.description,
-          tags: JSON.stringify(tagsArray),
+          tags: tags,
           image_url: imgData.path,
           video_url: "",
         });

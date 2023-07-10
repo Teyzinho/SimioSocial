@@ -19,6 +19,9 @@ const UserCardWrapper = styled.div`
 const CommentContent = styled.div`
   flex: 1;
   padding-top: 6px;
+  display:flex;
+  flex-direction: column;
+  gap:12px;
 `;
 
 const Comment = ({ postId }) => {

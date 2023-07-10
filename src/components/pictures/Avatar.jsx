@@ -10,12 +10,10 @@ const AvatarStyled = styled(Image)`
 
 const useLoadImage = (url, supabase) => {
   if (!url) {
-    console.log("no url")
       return null;
   }
   const { data } = supabase.storage.from("avatars").getPublicUrl(url);
 
-  console.log("url passada",url)
   return data.publicUrl;
 };
 
