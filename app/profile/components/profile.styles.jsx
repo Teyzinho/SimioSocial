@@ -8,12 +8,16 @@ export const ProfileCard = styled.div`
   margin-top: 42px;
   border-radius: 5px;
   position: relative;
+
 `;
 
 export const ProfileBanner = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 export const ProfileInfo = styled.div`

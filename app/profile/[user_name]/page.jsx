@@ -21,11 +21,14 @@ import {
 } from "../components/profile.styles";
 import useModal from "@/src/features/modal/useModal";
 import useLoadImage from "@/hooks/useLoadImage";
+import FollowButton from "@/src/components/followButton/FollowButton";
+import useFetchFollowers from "@/hooks/useFetchFollowers";
+import useFetchFollowing from "@/hooks/useFetchFollowing";
 
 const Profile = ({ params }) => {
   const [activeTab, setActiveTab] = useState("Posts");
   const [isUser, setIsUser] = useState(false);
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const { openModal } = useModal();
 
   const { feed, isLoadingData, profile } = useFetchProfilePosts(
@@ -37,6 +40,8 @@ const Profile = ({ params }) => {
   useEffect(() => {
     if (user?.id === profile?.id) {
       setIsUser(true);
+    } else {
+      setIsUser(false);
     }
   }, [user, profile]);
 
@@ -46,19 +51,18 @@ const Profile = ({ params }) => {
     setActiveTab(tab);
   };
 
-  const handleFollowersClick = () => {
-    console.log("seguidores");
-  };
-
-  const handleFollowingClick = () => {
-    console.log("seguindo");
-  };
-
   const handleEdit = () => {
     openModal("edit", {
       profile: profile,
     });
   };
+
+  const followersAmount = useFetchFollowers(profile?.id)
+  const followingAmount = useFetchFollowing(profile?.id)
+
+  if (isLoading || isLoadingData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main>
@@ -95,15 +99,18 @@ const Profile = ({ params }) => {
             Editar Perfil
           </Button>
         ) : (
-          <Button
-            style={{
-              marginLeft: "auto",
-              marginRight: "10px",
-              marginTop: "10px",
-            }}
-          >
-            Seguir
-          </Button>
+          <div style={{
+            marginLeft: "auto",
+            marginRight: "10px",
+            marginTop: "10px",
+            width: "80px",
+          }}>
+            <FollowButton
+              userId={user?.id}
+              followId={profile?.id}
+            />
+          </div>
+
         )}
 
         <div
@@ -118,17 +125,17 @@ const Profile = ({ params }) => {
         >
           {/* Seguidores */}
           <span style={{ display: "flex", gap: "8px", cursor: "pointer" }}>
-            <Typography onClick={handleFollowersClick} variant="semi_bold">
+            <Typography variant="semi_bold">
               Seguidores
             </Typography>
-            <Typography style={{ fontSize: "0.9rem" }}>20</Typography>
+            <Typography style={{ fontSize: "0.9rem" }}>{followersAmount}</Typography>
           </span>
           {/* Seguindo */}
           <span style={{ display: "flex", gap: "8px", cursor: "pointer" }}>
-            <Typography onClick={handleFollowingClick} variant="semi_bold">
+            <Typography variant="semi_bold">
               Seguindo
             </Typography>
-            <Typography style={{ fontSize: "0.9rem" }}>20</Typography>
+            <Typography style={{ fontSize: "0.9rem" }}>{followingAmount}</Typography>
           </span>
         </div>
 
@@ -147,12 +154,20 @@ const Profile = ({ params }) => {
       </ProfileCard>
 
       <div style={{ paddingTop: "26px" }}>
-      <FeedContainer>
-        {activeTab === "Posts" ? (
-            <Feed feed={feed} isLoading={isLoadingData} title={feed.length === 0 ? "Sem Posts Ainda" : "Posts"}/>
-        ) : (
-            <Feed feed={savedFeed} isLoading={isLoadingSaved} title={savedFeed.length === 0 ? "Sem Posts Salvos" : "Salvos"}/>
-        )}
+        <FeedContainer>
+          {activeTab === "Posts" ? (
+            <Feed
+              feed={feed}
+              isLoading={isLoadingData}
+              title={feed.length === 0 ? "Sem Posts Ainda" : "Posts"}
+            />
+          ) : (
+            <Feed
+              feed={savedFeed}
+              isLoading={isLoadingSaved}
+              title={savedFeed.length === 0 ? "Sem Posts Salvos" : "Salvos"}
+            />
+          )}
         </FeedContainer>
       </div>
     </main>

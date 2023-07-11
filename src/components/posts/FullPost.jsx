@@ -52,7 +52,7 @@ const FullPost = ({ postId }) => {
             {/* Header */}
             <PostHeader>
               {/* Prodifile */}
-              <UserCard followBtn={true} userId={post.user_id} time={post?.created_at}/>
+              <UserCard followBtn={true} userId={post.user_id} time={post?.created_at} profileId={user.id}/>
               {/* Button 3 dots */}
               <DotsButton userId={user?.id} post={post}/>
             </PostHeader>

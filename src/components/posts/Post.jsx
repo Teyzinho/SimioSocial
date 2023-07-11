@@ -13,10 +13,10 @@ import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
 
 const PostCard = styled.div`
-  margin-left:15px; /* gutter size */
+  margin-left:16px; /* gutter size */
   background-clip: padding-box;
 
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   border-radius: 5px;
   border: 1px solid #73737361;
   background-color: ${({ theme }) => theme.colors.neutral};

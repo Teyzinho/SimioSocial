@@ -12,6 +12,10 @@ const FollowButton = ({userId , followId}) => {
     const [isFollowing , setIsFollowing] = useState(false)
     const {openModal} = useModal();
 
+    if(userId === followId){
+      return;
+    }
+
     useEffect(() => {  
         if (!userId) {
             return;
@@ -33,7 +37,7 @@ const FollowButton = ({userId , followId}) => {
                 }
         }
         fetchUser();
-    },[supabase])
+    },[supabase , userId, followId])
 
     const handleFollow = async () =>{
         if(!userId){
@@ -72,19 +76,19 @@ const FollowButton = ({userId , followId}) => {
 
     
   return (
-    <Button bgcolor="transparent" onClick={handleFollow}>
+    <div>
         {
             isFollowing
         ?
-            <>
-                Deixar de Seguir
-            </>
+            <Button onClick={handleFollow}>
+                Seguindo
+            </Button>
         :
-            <>
+            <Button bgcolor="transparent" onClick={handleFollow}>
                 Seguir
-            </>  
+            </Button>  
         }
-    </Button>
+    </div>
   )
 }
 

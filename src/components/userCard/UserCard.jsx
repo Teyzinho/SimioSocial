@@ -4,11 +4,10 @@ import { formatDistanceToNow } from 'date-fns';
 import React, { useEffect, useState } from "react";
 import { Avatar } from "../pictures/Avatar";
 import styled from "styled-components";
-import { Button } from "../buttons/button";
 import Typography from "../display/Typography";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useGetProfileById from "@/hooks/useGetProfileById";
 import { useRouter } from 'next/navigation';
+import FollowButton from '../followButton/FollowButton';
 
 const Username = styled.span`
   display: flex;
@@ -34,7 +33,7 @@ const UserCardContainer = styled.div`
   }
 `;
 
-const UserCard = ({ followBtn, userId , time}) => {
+const UserCard = ({ followBtn, userId , time ,profileId}) => {
   const router = useRouter();
 
   if(!userId){
@@ -62,7 +61,7 @@ const UserCard = ({ followBtn, userId , time}) => {
           {timeAgo}
         </Typography>
       </div>
-      {followBtn && <Button>Seguir</Button>}
+      {followBtn && <FollowButton followId={userId} userId={profileId}/>}
     </UserCardContainer>
   );
 };

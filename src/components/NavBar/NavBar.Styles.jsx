@@ -11,7 +11,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   position: sticky;
   top: 0;
-  padding: 5px 15px;
+  padding: 5px 16px;
   z-index: 999;
 
   & h1 {
