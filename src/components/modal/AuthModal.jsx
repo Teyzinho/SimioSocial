@@ -74,6 +74,7 @@ const AuthModal = ({ onClose }) => {
             }}
             theme="dark"
             providers={["google"]}
+            onlyThirdPartyProviders={true}
         />
         </div>
       </LoginModal>

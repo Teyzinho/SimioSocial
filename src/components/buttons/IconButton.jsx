@@ -9,6 +9,7 @@ export const IconButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 0;
+  margin: 0;
   color: ${({ theme, color }) => color || theme.colors.primary};
   transition: all 0.2s;
   font-size: 0.8rem;

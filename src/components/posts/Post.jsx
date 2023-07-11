@@ -60,10 +60,8 @@ const Post = ({ data }) => {
       <PostHeader>
         {/* profile */}
         <UserCard userId={data.user_id} time={data.created_at}/>
-
         {/* Button 3 dots */}
         <DotsButton userId={user?.id} post={data}/>
-
       </PostHeader>
 
       {/* Image */}

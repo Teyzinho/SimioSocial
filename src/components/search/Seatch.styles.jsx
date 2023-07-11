@@ -9,10 +9,10 @@ export const SearchContainer = styled.div`
 
   & form {
     height: 100%;
+    width: 100%;
   }
 
   & input {
-
     border-radius: 25px;
 
     ${({ isOpen }) =>
@@ -26,6 +26,7 @@ export const SearchContainer = styled.div`
 
     height: 100%;
     padding-left: 16px;
+    width:100%;
 
     &::placeholder{
       padding-left: 16px;
@@ -41,9 +42,30 @@ export const SearchContainer = styled.div`
     }
   }
 
-  @media ${device.lg}{
-    display: none;
+  @media ${device.md}{
+    width: 50px;
+    flex: 0 0 0;
+
+    ${({ isOpen }) =>
+      isOpen &&
+      css`
+        width:70%;
+        position:absolute;
+        left: 50%;
+        transform: translate(-50%);
+    `}
+
+    & input{
+      width:40px;
+
+      ${({ isOpen }) =>
+      isOpen &&
+      css`
+        width:100%;
+    `}
+    }
   }
+
 `;
 
 export const GlassLabel = styled.label`
@@ -68,6 +90,7 @@ export const UlContainer = styled.ul`
   color: black;
 
   & li {
+    width:100%;
     cursor: pointer;
     background-color: ${({theme}) => theme.colors.neutral};
 

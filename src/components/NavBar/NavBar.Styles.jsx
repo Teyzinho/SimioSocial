@@ -28,8 +28,21 @@ export const Nav = styled.nav`
     color: white;
   }
 
+  @media ${device.md} {
+    justify-content: end;
+    gap:12px;
+
+    &>:first-child{
+      margin-right: auto;
+    }
+  }
+
   &>:last-child{
     flex: 0 0 200px;
     margin-right: 52px;
+
+    @media ${device.md} {
+      margin-right: 0px;
+  }
   }
 `;
