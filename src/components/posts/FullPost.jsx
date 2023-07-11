@@ -19,13 +19,14 @@ import {
 import useLoadImage from "@/hooks/useLoadImage";
 import DotsButton from "../dotsButton/DotsButton";
 import AddComment from "../addComment/AddComment";
+import Loading from "../loading/Loading";
 
 const FullPost = ({ postId }) => {
   const { post, loading, error } = getPostById(postId);
   const {user} = useUser();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {

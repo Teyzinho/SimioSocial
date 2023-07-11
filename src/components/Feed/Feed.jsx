@@ -6,6 +6,7 @@ import Masonry from 'react-masonry-css'
 import Post from "../posts/Post";
 import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
+import Loading from '../loading/Loading';
 
 const StyledFeed = styled(Masonry)`
   display: -webkit-box; 
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
 const Feed = ({feed : postData , isLoading , title}) => {
 
   if(isLoading){
-    return <div>Loading</div>
+    return <Loading/>;
   }
 
   return (

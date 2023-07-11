@@ -21,7 +21,7 @@ const SideBar = () => {
   const router = useRouter();
   const [profileImg, setProfileImg] = useState("/icons/person-circle.svg");
   const pathName = usePathname();
-  const { user } = useUser();
+  const { user , isLoading} = useUser();
   const profile = useGetProfileById(user?.id);
   const routes = useMemo(() => [
     {

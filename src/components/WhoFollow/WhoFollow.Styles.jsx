@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device } from "@/style/Breakpoints";
 
 export const WhoFollowCard = styled.div`
+    position:relative;
     width: 290px;
     height: 300px;
     flex: 0 0 290px;

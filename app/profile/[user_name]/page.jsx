@@ -24,6 +24,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 import FollowButton from "@/src/components/followButton/FollowButton";
 import useFetchFollowers from "@/hooks/useFetchFollowers";
 import useFetchFollowing from "@/hooks/useFetchFollowing";
+import Loading from "@/src/components/loading/Loading";
 
 const Profile = ({ params }) => {
   const [activeTab, setActiveTab] = useState("Posts");
@@ -61,7 +62,7 @@ const Profile = ({ params }) => {
   const followingAmount = useFetchFollowing(profile?.id)
 
   if (isLoading || isLoadingData) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   return (
