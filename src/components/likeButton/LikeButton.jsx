@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { AiFillHeart , AiOutlineHeart } from "react-icons/Ai";
+import { AiFillHeart , AiOutlineHeart } from "react-icons/ai";
 
 import { IconButton } from "../buttons/IconButton";
 
