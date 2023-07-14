@@ -132,7 +132,7 @@ const EditProfileModal = ({ onClose, profile }) => {
     return url.startsWith("http://") || url.startsWith("https://");
   };
 
-  const { register, handleSubmit, reset, setValue, watch } = useForm({
+  const { handleSubmit, setValue } = useForm({
     defaultValues: {
       banner: null,
       avatar: null,

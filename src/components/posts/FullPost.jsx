@@ -1,5 +1,4 @@
 "use client";
-import { useSessionContext } from "@supabase/auth-helpers-react";
 
 import { PostHeader } from "./Post.styles";
 import UserCard from "../userCard/UserCard";
@@ -24,6 +23,7 @@ import Loading from "../loading/Loading";
 const FullPost = ({ postId }) => {
   const { post, loading, error } = getPostById(postId);
   const {user} = useUser();
+  const image_url = useLoadImage(post?.image_url)
 
   if (loading) {
     return <Loading/>;
@@ -33,11 +33,6 @@ const FullPost = ({ postId }) => {
     return <div>Error: {error}</div>;
   }
 
-  const image_url = useLoadImage(post.image_url)
-
-  const handlePostClick = () => {
-    console.log("Post click");
-  };
 
   return (
     <main>

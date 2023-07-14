@@ -46,7 +46,7 @@ const Feed = ({feed : postData , isLoading , title}) => {
       columnClassName="masonry-grid-column"
       >
         {postData?.map((item) => {
-          return <Post key={item.id} data={...item} />;
+          return <Post key={item.id} data={{ ...item }} />;
         })}
       </StyledFeed>
     </Wrapper>

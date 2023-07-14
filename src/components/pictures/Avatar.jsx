@@ -10,40 +10,45 @@ const AvatarStyled = styled(Image)`
 
 const useLoadImage = (url, supabase) => {
   if (!url) {
-      return null;
+    return "/icons/person-circle.svg"; // Imagem de avatar padrão
   }
+
   const { data } = supabase.storage.from("avatars").getPublicUrl(url);
 
-  return data.publicUrl;
+  return data?.publicUrl;
 };
 
-export const Avatar = ({src, width}) => {
-    const supabase = useSupabaseClient();
-    const [avatarImg, setAvatarimg] = useState()
+export const Avatar = ({ src, width }) => {
+  const supabase = useSupabaseClient();
+  
+  // Verifica se a URL começa com "http://" ou "https://"
+  const isExternalUrl = (url) => {
+    return url?.startsWith("http://") || url?.startsWith("https://");
+  };
 
-    // Verifica se a URL começa com "http://" ou "https://"
-    const isExternalUrl = (url) => {
-      return url?.startsWith("http://") || url?.startsWith("https://");
-    };
+  const isExternal = isExternalUrl(src);
 
-    const isExternal = isExternalUrl(src)
+  const [avatarImg, setAvatarimg] = useState(() => {
+    if (isExternal) {
+      return src;
+    } else {
+      return useLoadImage(src, supabase);
+    }
+  });
 
-    useEffect(() => {
-      if(!isExternal){
-        const data = useLoadImage(src, supabase)
-        setAvatarimg(data);
-      }else{
-        setAvatarimg(src)
-      }
-    },[src, supabase])
+  useEffect(() => {
+    if (!isExternal) {
+      const data = useLoadImage(src, supabase);
+      setAvatarimg(data);
+    }
+  }, [src, supabase]);
 
   return (
     <AvatarStyled
-        src={avatarImg ? avatarImg : "/icons/person-circle.svg"}
-        width={width ? width : 35}
-        height={width ? width : 35}
-        alt="Profile Picture"
-    >  
-    </AvatarStyled>
-  )
-}
+      src={avatarImg}
+      width={width ? width : 35}
+      height={width ? width : 35}
+      alt="Profile Picture"
+    />
+  );
+};

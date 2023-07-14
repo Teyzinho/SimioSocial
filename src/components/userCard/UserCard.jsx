@@ -62,12 +62,12 @@ const UserCardContainer = styled.div`
 
 const UserCard = ({ followBtn, userId , time ,profileId}) => {
   const router = useRouter();
+  const user = useGetProfileById(userId);
 
   if(!userId){
     return null;
   }
   
-  const user = useGetProfileById(userId);
 
   const createdDate = new Date(time);
   const timeAgo = formatDistanceToNow(createdDate, { addSuffix: false });
