@@ -28,7 +28,7 @@ export const Avatar = ({ src, width }) => {
     };
 
     loadImage();
-  }, [src, supabase, isExternal]);
+  }, [src, supabase, isExternal,data]);
 
   return (
     <Image

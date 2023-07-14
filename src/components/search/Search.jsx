@@ -53,7 +53,7 @@ const Search = () => {
 
       fetchSearch();
     }
-  }, [inputValue, isOpen]);
+  }, [inputValue, isOpen,supabase]);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);

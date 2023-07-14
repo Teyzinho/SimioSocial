@@ -43,7 +43,7 @@ const Comment = ({ postId }) => {
     };
 
     fetchComment();
-  }, [postId]);
+  }, [postId,supabaseClient]);
 
   return (
     <CommentWrapper>
