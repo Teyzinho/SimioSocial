@@ -1,12 +1,5 @@
-import styled  from "styled-components";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-
-const AvatarStyled = styled(Image)`
-    border-radius: 100%;
-    object-fit: cover;
-`
 
 const useLoadImage = (url, supabase) => {
   if (!url) {
@@ -20,35 +13,32 @@ const useLoadImage = (url, supabase) => {
 
 export const Avatar = ({ src, width }) => {
   const supabase = useSupabaseClient();
-  
-  // Verifica se a URL começa com "http://" ou "https://"
-  const isExternalUrl = (url) => {
-    return url?.startsWith("http://") || url?.startsWith("https://");
-  };
-
-  const isExternal = isExternalUrl(src);
-
-  const [avatarImg, setAvatarimg] = useState(() => {
-    if (isExternal) {
-      return src;
-    } else {
-      return useLoadImage(src, supabase);
-    }
-  });
+  const isExternal = src?.startsWith("http://") || src?.startsWith("https://");
+  const [avatarImg, setAvatarImg] = useState(null);
 
   useEffect(() => {
     if (!isExternal) {
-      const data = useLoadImage(src, supabase);
-      setAvatarimg(data);
+      const loadImage = async () => {
+        const data = await useLoadImage(src, supabase);
+        setAvatarImg(data);
+      };
+
+      loadImage();
+    } else {
+      setAvatarImg(src);
     }
-  }, [src, supabase]);
+  }, [src, supabase, isExternal]);
 
   return (
-    <AvatarStyled
+    <img
       src={avatarImg}
       width={width ? width : 35}
       height={width ? width : 35}
       alt="Profile Picture"
+      style={{
+        borderRadius: "100%",
+        objectFit: "cover",
+      }}
     />
   );
 };
