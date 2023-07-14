@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import Image from "next/image";
 
-const useLoadImage = (url, supabase) => {
+const useAvatarImage = (url, supabase) => {
   if (!url) {
     return "/icons/person-circle.svg"; // Imagem de avatar padrão
   }
@@ -20,7 +20,7 @@ export const Avatar = ({ src, width }) => {
   useEffect(() => {
     const loadImage = async () => {
       if (!isExternal) {
-        const data = await useLoadImage(src, supabase);
+        const data = await useAvatarImage(src, supabase);
         setAvatarImg(data);
       } else {
         setAvatarImg(src);
