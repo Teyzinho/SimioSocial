@@ -1,6 +1,6 @@
 "use client";
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/Ai";
+import { AiOutlineClose } from "react-icons/ai";
 import useModal from "@/src/features/modal/useModal";
 
 import { Auth } from '@supabase/auth-ui-react'

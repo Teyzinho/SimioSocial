@@ -5,8 +5,8 @@ import { SideBarButton } from "../../../src/components/buttons/button";
 import useModal from "@/src/features/modal/useModal";
 import SideBarItem from "./SideBarItem";
 
-import { AiOutlineHome } from "react-icons/Ai";
-import { IoMdNotificationsOutline } from "react-icons/Io";
+import { AiOutlineHome } from "react-icons/ai";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsChatLeftDots, BsBookmark } from "react-icons/bs";
 import { CiLogout,CiLogin } from "react-icons/ci";
 

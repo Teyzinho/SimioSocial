@@ -11,7 +11,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 import { Avatar } from "../pictures/Avatar";
 
 import { BsTrashFill, BsUpload } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/Ai";
+import { AiOutlineClose } from "react-icons/ai";
 import {MdOutlineAddAPhoto} from "react-icons/md"
 import Image from "next/image";
 import { Button } from "../buttons/button";

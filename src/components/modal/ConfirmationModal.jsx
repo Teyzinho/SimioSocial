@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/Ai";
 import Typography from "../display/Typography";
 import { Button } from "../buttons/button";
 
