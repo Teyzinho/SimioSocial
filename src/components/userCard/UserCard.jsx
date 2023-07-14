@@ -18,15 +18,16 @@ const Username = styled.span`
 const UsernameTitle = styled.p`
   /* max-width:110px; */
   max-width:6vw;
-  min-width:75px;
+  width:fit-content;
+  /* min-width:75px; */
   font-weight:600;
 
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 
-  @media ${device.md} {
-
+  @media ${device.sm} {
+    max-width:20vw;
   }
 `
 

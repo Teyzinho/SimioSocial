@@ -16,7 +16,7 @@ const WhoFollow = () => {
     const fetchUsers = async () => {
       setIsLoadingData(true)
       try {
-        let query = supabase.from("profiles").select("*");
+        let query = supabase.from("profiles").select("*").limit(4);
 
         if (user) {
           query = query.neq("id", user.id);

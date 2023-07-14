@@ -30,18 +30,18 @@ const SideBar = () => {
       active: pathName === "/",
       href: "/",
     },
-    {
-      icon: IoMdNotificationsOutline,
-      label: "Notificações",
-      active: pathName === "/notification",
-      href: "/notification",
-    },
-    {
-      icon: BsChatLeftDots,
-      label: "Mensagens",
-      active: pathName === "/messages",
-      href: "/messages",
-    },
+    // {
+    //   icon: IoMdNotificationsOutline,
+    //   label: "Notificações",
+    //   active: pathName === "/notification",
+    //   href: "/notification",
+    // },
+    // {
+    //   icon: BsChatLeftDots,
+    //   label: "Mensagens",
+    //   active: pathName === "/messages",
+    //   href: "/messages",
+    // },
     {
       icon: BsBookmark,
       label: "Posts Salvos",

@@ -27,16 +27,20 @@ import useFetchFollowing from "@/hooks/useFetchFollowing";
 import Loading from "@/src/components/loading/Loading";
 
 const Profile = ({ params }) => {
+
+  const decodedUsername = decodeURIComponent(params.user_name);
+  console.log("username", decodedUsername);
+
   const [activeTab, setActiveTab] = useState("Posts");
   const [isUser, setIsUser] = useState(false);
   const { user, isLoading } = useUser();
   const { openModal } = useModal();
 
   const { feed, isLoadingData, profile } = useFetchProfilePosts(
-    params.user_name
+    decodedUsername
   );
   const { feed: savedFeed, isLoadingData: isLoadingSaved } =
-    useFetchSavedPostsByUserName(params.user_name);
+    useFetchSavedPostsByUserName(decodedUsername);
 
   useEffect(() => {
     if (user?.id === profile?.id) {
