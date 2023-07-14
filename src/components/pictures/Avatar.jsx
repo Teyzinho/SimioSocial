@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import Image from "next/image";
 
 const useLoadImage = (url, supabase) => {
   if (!url) {
@@ -14,23 +15,23 @@ const useLoadImage = (url, supabase) => {
 export const Avatar = ({ src, width }) => {
   const supabase = useSupabaseClient();
   const isExternal = src?.startsWith("http://") || src?.startsWith("https://");
-  const [avatarImg, setAvatarImg] = useState(null);
+  const [avatarImg, setAvatarImg] = useState("/icons/person-circle.svg");
 
   useEffect(() => {
-    if (!isExternal) {
-      const loadImage = async () => {
+    const loadImage = async () => {
+      if (!isExternal) {
         const data = await useLoadImage(src, supabase);
         setAvatarImg(data);
-      };
+      } else {
+        setAvatarImg(src);
+      }
+    };
 
-      loadImage();
-    } else {
-      setAvatarImg(src);
-    }
+    loadImage();
   }, [src, supabase, isExternal]);
 
   return (
-    <img
+    <Image
       src={avatarImg}
       width={width ? width : 35}
       height={width ? width : 35}
