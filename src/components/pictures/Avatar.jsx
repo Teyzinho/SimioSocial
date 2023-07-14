@@ -16,11 +16,11 @@ export const Avatar = ({ src, width }) => {
   const supabase = useSupabaseClient();
   const isExternal = src?.startsWith("http://") || src?.startsWith("https://");
   const [avatarImg, setAvatarImg] = useState("/icons/person-circle.svg");
+  const data = useAvatarImage(src, supabase);
 
   useEffect(() => {
     const loadImage = async () => {
       if (!isExternal) {
-        const data = await useAvatarImage(src, supabase);
         setAvatarImg(data);
       } else {
         setAvatarImg(src);
