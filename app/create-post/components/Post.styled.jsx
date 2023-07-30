@@ -10,7 +10,7 @@ export const CreatePostForm = styled.form`
   background-color: ${({ theme }) => theme.colors.neutral};
   border-radius: 5px;
   box-shadow: -3px 4px 9px -1px rgba(0, 0, 0, 0.363);
-
+  position: relative;
   display: flex;
   padding: 50px;
 
@@ -20,16 +20,14 @@ export const CreatePostForm = styled.form`
     gap: 52px;
   }
   @media ${device.sm} {
-    width: 100%;
+    width: 95%;
     flex-direction: column;
-    padding: 0;
-
+    padding: 50px 0;
   }
   @media ${device.xs} {
-    width: 100%;
+    width: 95%;
     flex-direction: column;
   }
-
 `;
 
 export const FileContainer = styled.div`
@@ -49,6 +47,11 @@ export const File = styled.div`
   align-items: center;
   justify-content: center;
   border: 3px solid ${({ theme }) => theme.colors.primary};
+
+  @media ${device.sm} {
+    width: 200px;
+    height:400px;
+  }
 `;
 
 export const FileButton = styled.button`
@@ -76,11 +79,30 @@ export const DescContainer = styled.div`
       outline: none;
       border-bottom: 2px solid ${({ theme }) => theme.colors.secondary};
     }
+
+    @media ${device.sm} {
+      width: 300px;
+    }
   }
 
   & > :first-child {
     font-size: 2.5rem;
   }
+
+  @media ${device.sm} {
+    padding-top: 25px;
+    padding-bottom: 50px;
+    padding-left:16px;
+  }
+
+  & :last-child {
+
+    @media ${device.sm} {
+      padding: 0;
+    }
+
+  }
+
 `;
 
 export const TagContainer = styled.div``;
@@ -93,6 +115,8 @@ export const TagButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   margin-left: 8px;
+
+  margin: 8px;
 `;
 
 export const ShowTags = styled.div`

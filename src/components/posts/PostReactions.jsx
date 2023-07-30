@@ -19,7 +19,7 @@ const PostReactions = ({
       <CommentButton postId={postId}/>
       
     {/* Share */}
-      <IconButton color="white">
+      <IconButton color="#fff">
         <FiShare />
       </IconButton>
     {/* Save */}

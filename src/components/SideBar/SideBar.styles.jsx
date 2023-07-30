@@ -52,7 +52,7 @@ export const StySideBar = styled.div`
         bottom: 0;
         height: fit-content;
         width: 100%;
-        justify-content: space-between;
+        justify-content: space-around;
         background-color: ${({theme}) => theme.colors.neutral};
         
         flex-direction: row;

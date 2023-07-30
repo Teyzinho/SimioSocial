@@ -19,6 +19,10 @@ export const Nav = styled.nav`
     font-style: normal;
     font-weight: 200;
     font-size: 1.5rem;
+
+    @media ${device.sm}{
+      display:none;
+    }
   }
 
   & a {

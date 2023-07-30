@@ -162,7 +162,7 @@ const CreatePost = () => {
   }, [session, router, openModal]);
 
   return (
-    <main>
+    <main style={{width:'100vw', position:'relative', paddingBottom:'150px'}}>
       <CreatePostForm onSubmit={handleSubmit(onSubmit)}>
         <FileContainer>
           <File height={selectedImage !== null ? "true" : undefined}>
@@ -237,8 +237,9 @@ const CreatePost = () => {
             type="submit"
             style={{
               padding: "15px 70px",
-              marginTop: "auto",
-              marginLeft: "auto",
+              position: "absolute",
+              bottom:'8px',
+              right:'16px',
             }}
             disabled={isLoading}
           >

@@ -6,7 +6,8 @@ const nextConfig = {
       styledComponents: true,
     },
     images: {
-      domains: ["lh3.googleusercontent.com", "jizcevknjxmffwlkgbeg.supabase.co"]
+      domains: ["lh3.googleusercontent.com", "jizcevknjxmffwlkgbeg.supabase.co"],
+      unoptimized: true,
     },
   }
   

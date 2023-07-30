@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { device } from "@/style/Breakpoints";
 
 export const IconButton = styled.button`
-  background-color: transparent;
   border: none;
   cursor: pointer;
   display: flex;
