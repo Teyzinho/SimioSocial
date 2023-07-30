@@ -4,5 +4,5 @@
 
 
 * , ::before, ::after{
-  box-sizing: unset;
+  box-sizing: unset !important;
 }
