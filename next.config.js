@@ -8,6 +8,7 @@ const nextConfig = {
     images: {
       domains: ["lh3.googleusercontent.com", "jizcevknjxmffwlkgbeg.supabase.co"],
       unoptimized: true,
+      dangerouslyAllowSVG: true,
     },
   }
   

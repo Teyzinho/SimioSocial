@@ -12,6 +12,7 @@ export const IconButton = styled.button`
   color: ${({ theme, color }) => color || theme.colors.primary};
   transition: all 0.2s;
   font-size: 0.8rem;
+  position: relative;
 
   & svg {
     width: ${({ width }) => width || "17px"};
